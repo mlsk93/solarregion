@@ -185,12 +185,45 @@
       .f-progress, .f-trust { padding-left: 20px; padding-right: 20px; }
       .f-success, .f-disqualify { padding: 36px 20px; }
     }
+  
+    /* Product selection cards */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .product-card {
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 16px 18px;
+      cursor: pointer;
+      text-align: center;
+      background: #fff;
+      transition: all .22s;
+      position: relative;
+    }
+    .product-card:hover { border-color: #FFB380; background: rgba(255,92,0,0.02); }
+    .product-card.selected { border-color: var(--orange); background: rgba(255,92,0,0.05); }
+    .product-card.selected::after {
+      content: "✓";
+      position: absolute; top: 10px; right: 12px;
+      width: 20px; height: 20px;
+      background: var(--orange); color: #fff;
+      border-radius: 50%; font-size: 0.68rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-icon { font-size: 2.4rem; margin-bottom: 10px; display: block; }
+    .product-name { font-size: 0.85rem; font-weight: 700; color: var(--dark); line-height: 1.3; }
+    .product-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+    @media(max-width:400px){ .product-grid { grid-template-columns: 1fr; } }
+
   </style>
 </head>
 <body class="funnel-page">
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Green<span>Horizon</span></a>
+  <a href="index.html" class="nav-logo">&#9728; Green<span>Horizon</span></a>
   <ul class="nav-links" id="navLinks">
     <li class="nav-dropdown">
       <a href="#" class="nav-drop-toggle">Regionen ▾</a>
@@ -237,13 +270,40 @@
     <div class="f-progress">
       <div class="f-prog-dots">
         <div class="f-dot active"></div><div class="f-dot"></div><div class="f-dot"></div>
-        <div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div>
+        <div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div>
+        <div class="f-dot"></div><div class="f-dot"></div>
       </div>
       <p class="f-prog-label" id="fProgLabel">Geprüfte Partner aus deiner Region warten</p>
     </div>
 
     <!-- ── STEP 1 ── -->
-    <div class="f-step active" id="fStep1">
+        <!-- ── STEP 0: Produkt-Auswahl ── -->
+    <div class="f-step active" id="fStep0">
+      <p class="f-question">Was möchtest du berechnen?</p>
+      <p class="f-sub">Wähle dein Wunschprodukt – wir finden den passenden Fachbetrieb</p>
+
+      <div class="product-grid">
+        <button class="product-card" onclick="selectProduct(this,'Solar + Wärmepumpe',70)">
+          <span class="product-icon">🏠<br><small style="font-size:0.6em">☀+🌡</small></span>
+          <div class="product-name">Solaranlage +<br>Wärmepumpe</div>
+          <div class="product-sub">Maximale Ersparnis</div>
+        </button>
+        <button class="product-card" onclick="selectProduct(this,'Solaranlage',0)">
+          <span class="product-icon">☀</span>
+          <div class="product-name">Solaranlage</div>
+          <div class="product-sub">Strom selbst erzeugen</div>
+        </button>
+        <button class="product-card" onclick="selectProduct(this,'Wärmepumpe',0)">
+          <span class="product-icon">🌡</span>
+          <div class="product-name">Wärmepumpe</div>
+          <div class="product-sub">Heizen mit Umweltwärme</div>
+        </button>
+      </div>
+      <p class="f-disclaimer">Alle Produkte: kostenlos, unverbindlich, geprüfte Fachbetriebe</p>
+    </div>
+
+    <!-- ── STEP 1: Eigenheim ── -->
+<div class="f-step" id="fStep1">
       <p class="f-question">Besitzt du eine Immobilie?</p>
       <p class="f-sub">Kostenlose Analyse – dauert nur 2 Minuten</p>
       <div class="f-choices">
@@ -466,7 +526,7 @@
   </div>
 </div>
 
-<div style="background:#F4F7F4;border-top:1px solid #E2E8E2;padding:14px;text-align:center;font-size:0.78rem;color:#6B7A6B">Antonio Schmidt · GreenHorizon Energy · Amselweg 29, 32657 Lemgo · <a href="tel:+4915150490420" style="color:var(--orange)">015150490420</a> · <a href="/cdn-cgi/l/email-protection#bed7d0d8d1fed9ccdbdbd0d6d1ccd7c4d1d093dbd0dbccd9c790d7d0d8d1" style="color:var(--orange)"><span class="__cf_email__" data-cfemail="167f7870795671647373787e79647f6c79783b73787364716f387f787079">[email&#160;protected]</span></a></div>
+<div style="background:#F4F7F4;border-top:1px solid #E2E8E2;padding:14px;text-align:center;font-size:0.78rem;color:#6B7A6B">Antonio Schmidt · GreenHorizon Energy · Amselweg 29, 32657 Lemgo · <a href="tel:+4915150490420" style="color:var(--orange)">015150490420</a> · <a href="/cdn-cgi/l/email-protection#bed7d0d8d1fed9ccdbdbd0d6d1ccd7c4d1d093dbd0dbccd9c790d7d0d8d1" style="color:var(--orange)"><span class="__cf_email__" data-cfemail="167f7870795671647373787e79647f6c79783b73787364716f387f787079">info@greenhorizon-energy.info</span></a></div>
 <footer class="footer" style="padding:24px 6vw">
   <div class="footer-bottom" style="margin:0;padding:0;border:none;max-width:1100px">
     <span>© 2026 GreenHorizon</span>
@@ -486,13 +546,14 @@ const S = {
 };
 
 const HEADERS = {
-  1: ['Schritt 1 von 7', 'Kostenlose Solar-Analyse', 'Dauert nur 2 Minuten – 100% unverbindlich'],
-  2: ['Schritt 2 von 7', 'Dach-Check', 'Kurze Einschätzung – wir prüfen den Rest'],
-  3: ['Schritt 3 von 7', 'Dein Einsparpotenzial', 'So berechnen wir deine persönliche Ersparnis'],
-  4: ['Schritt 4 von 7', 'Dein Zeitplan', 'Damit dein Partner richtig planen kann'],
-  5: ['Schritt 5 von 7', 'Deine Kaufabsicht', 'Fast am Ziel – noch 2 Schritte'],
-  6: ['Schritt 6 von 7', 'Deine Kontaktdaten', 'Geprüfte Fachbetriebe warten auf dich'],
-  7: ['Schritt 7 von 7', 'Beste Erreichbarkeit', 'Letzter Schritt – dann bist du fertig!'],
+  0: ['Schritt 1 von 8', 'Kostenlose Energie-Analyse', 'Wähle dein Produkt – dauert nur 2 Minuten'],
+  1: ['Schritt 2 von 8', 'Deine Immobilie', '100% kostenlos & unverbindlich'],
+  2: ['Schritt 3 von 8', 'Dach-Check', 'Kurze Einschätzung – wir prüfen den Rest'],
+  3: ['Schritt 4 von 8', 'Dein Einsparpotenzial', 'So berechnen wir deine persönliche Ersparnis'],
+  4: ['Schritt 5 von 8', 'Dein Zeitplan', 'Damit dein Partner richtig planen kann'],
+  5: ['Schritt 6 von 8', 'Deine Kaufabsicht', 'Fast am Ziel – noch 2 Schritte'],
+  6: ['Schritt 7 von 8', 'Deine Kontaktdaten', 'Geprüfte Fachbetriebe warten auf dich'],
+  7: ['Schritt 8 von 8', 'Beste Erreichbarkeit', 'Letzter Schritt – dann bist du fertig!'],
 };
 
 const TIERS = [
@@ -508,15 +569,23 @@ function showStep(n) {
   if (!el) return;
   el.classList.add('active');
   S.step = n;
-  const [lbl, title, sub] = HEADERS[n];
-  document.getElementById('fStepLabel').textContent  = lbl;
-  document.getElementById('fHeaderTitle').textContent = title;
-  document.getElementById('fHeaderSub').textContent   = sub;
+  const h = HEADERS[n] || HEADERS[7];
+  document.getElementById('fStepLabel').textContent  = h[0];
+  document.getElementById('fHeaderTitle').textContent = h[1];
+  document.getElementById('fHeaderSub').textContent   = h[2];
   document.querySelectorAll('.f-dot').forEach((d, i) => {
     d.classList.remove('done','active');
-    if (i+1 < n) d.classList.add('done');
-    else if (i+1 === n) d.classList.add('active');
+    if (i <= n-1) d.classList.add('done');
+    else if (i === n) d.classList.add('active');
   });
+}
+
+function selectProduct(btn, value, pts) {
+  document.querySelectorAll('.product-card').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  S.answers.produkt = value;
+  addScore(pts);
+  setTimeout(() => showStep(1), 320);
 }
 
 function addScore(pts) {
@@ -615,7 +684,8 @@ async function submitFunnel() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        _subject: `🔥 Neuer Lead – ${tier.label} – Score: ${lead.score} Pkt – ${lead.name || 'Unbekannt'} (${lead.plz || '?'})`,
+        _subject: `🔥 Neuer Lead – ${lead.produkt || 'Solar'} – ${tier.label} – Score: ${lead.score} Pkt – ${lead.name || 'Unbekannt'} (${lead.plz || '?'})`,
+        '🔧 Produkt':         lead.produkt     || '–',
         '⭐ Lead-Score':      `${lead.score} Punkte – ${tier.label}`,
         '👤 Name':            lead.name        || '–',
         '📞 Telefon':         lead.tel         || '–',
