@@ -564,26 +564,64 @@ function refreshFinalScore() {
   document.getElementById('finalScoreTier').textContent = tier.label + (S.score >= 100 ? ' – du wirst bevorzugt vermittelt!' : '');
 }
 
-function submitFunnel() {
-  const lead = { ...S.answers, score: S.score, erreichbarkeit: S.tags, ts: new Date().toISOString() };
-  console.log('LEAD:', JSON.stringify(lead, null, 2));
+/* ═══════════════════════════════════════════════
+   LEAD DELIVERY – Formspree (E-Mail) ✅ aktiv
+   Jeder Lead → info@greenhorizon-energy.info
+   Formspree Dashboard: formspree.io/forms
+   ═══════════════════════════════════════════════ */
 
-  // Hide step & trust
-  document.getElementById('fStep7').classList.remove('active');
-  document.getElementById('fTrust').style.display = 'none';
+  const CONFIG = {
+    FORMSPREE_ID: 'mzdjwqwp',   // ✅ aktiv
+    EMAIL:        'info@greenhorizon-energy.info'
+  };
+
+async function submitFunnel() {
+  const lead = {
+    ...S.answers,
+    score: S.score,
+    erreichbarkeit: S.tags,
+    ts: new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })
+  };
 
   const tier = TIERS.find(t => S.score >= t.min) || TIERS[3];
+
+  // ── Sofort UI zeigen ──────────────────────────
+  document.getElementById('fStep7').classList.remove('active');
+  document.getElementById('fTrust').style.display = 'none';
   const badge = document.getElementById('scoreResultBadge');
   badge.textContent = tier.label;
   badge.className = 'f-score-result ' + tier.cls;
   document.getElementById('successMsg').textContent = tier.msg;
   document.getElementById('fSuccess').style.display = 'block';
-
-  // Update header
   document.getElementById('fHeaderTitle').textContent = 'Anfrage erfolgreich!';
-  document.getElementById('fHeaderSub').textContent   = 'Danke – ein Partner meldet sich bald bei dir';
+  document.getElementById('fHeaderSub').textContent   = 'Danke – ein Partner meldet sich bald';
   document.getElementById('fStepLabel').textContent   = 'Fertig ✓';
   document.querySelectorAll('.f-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
+
+  // ── 1. E-Mail via Formspree ───────────────────
+  try {
+    await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: `🔥 Neuer Lead – ${tier.label} – Score: ${lead.score} Pkt – ${lead.name || 'Unbekannt'} (${lead.plz || '?'})`,
+        '⭐ Lead-Score':      `${lead.score} Punkte – ${tier.label}`,
+        '👤 Name':            lead.name        || '–',
+        '📞 Telefon':         lead.tel         || '–',
+        '📧 E-Mail':          lead.email       || '–',
+        '📍 PLZ':             lead.plz         || '–',
+        '🏠 Eigenheim':       lead.eigenheim   || '–',
+        '🌞 Dach':            lead.dach        || '–',
+        '⚡ Stromkosten':     lead.strom       || '–',
+        '📅 Zeitrahmen':      lead.zeitrahmen  || '–',
+        '✅ Kaufabsicht':     lead.intention   || '–',
+        '🕐 Erreichbarkeit':  lead.erreichbarkeit?.join(', ') || '–',
+        '🕒 Zeitstempel':     lead.ts,
+      })
+    });
+  } catch(e) { console.warn('Formspree error:', e); }
+
+  // Telegram deaktiviert – nur E-Mail via Formspree aktiv
 }
 
 function disqualify() {
