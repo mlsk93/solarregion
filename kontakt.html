@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt – SolarRegion NRW</title>
+  <meta name="description" content="Kontaktiere SolarRegion – dein Solarberater in NRW. Wir antworten innerhalb eines Werktages.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="sun-icon">☀</span>Solar<span>Region</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="solaranlage-detmold.html">Detmold</a></li>
+    <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
+    <li><a href="ueber-uns.html">Über uns</a></li>
+    <li><a href="kontakt.html" style="color:var(--orange)">Kontakt</a></li>
+    <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <span class="eyebrow" style="color:var(--gold)">📬 Wir helfen dir</span>
+  <h1>Kontakt aufnehmen</h1>
+  <p>Hast du Fragen zu Solar, zur Förderung oder unserem Service? Wir antworten innerhalb eines Werktages.</p>
+</div>
+
+<section class="section">
+  <div class="kontakt-grid">
+    <div class="kontakt-info">
+      <h3>So erreichst du uns</h3>
+
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <strong>E-Mail</strong>
+          <span>hallo@solarregion.de</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <strong>Region</strong>
+          <span>Detmold & Kreis Lippe, NRW</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">⏱</div>
+        <div>
+          <strong>Antwortzeit</strong>
+          <span>In der Regel innerhalb 24 Stunden (Mo–Fr)</span>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:rgba(255,92,0,0.06);border-radius:var(--radius);border-left:4px solid var(--orange)">
+        <strong style="display:block;font-size:0.88rem;margin-bottom:8px">☀ Schneller Weg:</strong>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px">Für ein konkretes Solarangebot nutze direkt unseren Solar-Check – das ist schneller als eine E-Mail!</p>
+        <a href="solar-check.html" class="btn btn-primary btn-sm">Solar-Check starten →</a>
+      </div>
+    </div>
+
+    <div class="kontakt-form">
+      <h3>Nachricht schreiben</h3>
+
+      <div class="form-group">
+        <label for="k-name">Name</label>
+        <input type="text" class="form-input" id="k-name" placeholder="Max Mustermann">
+      </div>
+
+      <div class="form-group">
+        <label for="k-email">E-Mail-Adresse</label>
+        <input type="email" class="form-input" id="k-email" placeholder="max@beispiel.de">
+      </div>
+
+      <div class="form-group">
+        <label for="k-betreff">Betreff</label>
+        <select class="form-select" id="k-betreff">
+          <option value="">Bitte wählen…</option>
+          <option>Frage zur Förderung</option>
+          <option>Frage zu meiner Anfrage</option>
+          <option>Partnerbetrieb werden</option>
+          <option>Technische Frage</option>
+          <option>Sonstiges</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="k-nachricht">Nachricht</label>
+        <textarea class="form-input" id="k-nachricht" rows="5" placeholder="Deine Nachricht…" style="resize:vertical"></textarea>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="sendKontakt()">
+        📬 Nachricht senden
+      </button>
+
+      <p class="disclaimer" style="margin-top:16px">
+        Deine Daten werden nur zur Beantwortung deiner Anfrage genutzt und nicht weitergegeben.
+        <a href="#" style="color:var(--orange)">Datenschutzerklärung</a>
+      </p>
+
+      <div id="kontakt-success" style="display:none;text-align:center;padding:24px;background:rgba(255,92,0,0.06);border-radius:var(--radius);margin-top:16px">
+        <div style="font-size:2.5rem;margin-bottom:12px">✅</div>
+        <strong>Nachricht erhalten!</strong>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:6px">Wir melden uns innerhalb von 24 Stunden bei dir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" style="padding-top:56px;padding-bottom:56px">
+  <div class="cta-banner">
+    <h2>Noch schneller: Solar-Check</h2>
+    <p>Für ein konkretes Angebot ist der Solar-Check die schnellste Option – 2 Minuten, komplett kostenlos</p>
+    <a href="solar-check.html" class="btn btn-secondary btn-lg">☀ Jetzt Solar-Check starten →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="color:white"><span class="sun-icon">☀</span>Solar<span>Region</span></div>
+      <p>Dein regionaler Solarberater in NRW.</p>
+    </div>
+    <div>
+      <h4>Regionen</h4>
+      <ul>
+        <li><a href="solaranlage-detmold.html">Solaranlage Detmold</a></li>
+        <li><a href="#">Solaranlage NRW</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ratgeber</h4>
+      <ul>
+        <li><a href="ratgeber-lohnt-sich-solar.html">Lohnt sich Solar 2026?</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Links</h4>
+      <ul>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="#">Impressum</a></li>
+        <li><a href="#">Datenschutz</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 SolarRegion</span>
+    <span>Made in NRW ☀</span>
+  </div>
+</footer>
+
+<script>
+  function sendKontakt() {
+    const name = document.getElementById('k-name').value.trim();
+    const email = document.getElementById('k-email').value.trim();
+    const nachricht = document.getElementById('k-nachricht').value.trim();
+    if (!name || !email || !nachricht) {
+      alert('Bitte fülle alle Pflichtfelder aus.');
+      return;
+    }
+    document.getElementById('kontakt-success').style.display = 'block';
+    document.querySelector('button[onclick="sendKontakt()"]').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
