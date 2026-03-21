@@ -191,11 +191,29 @@
 
 <nav class="nav">
   <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Solar<span>Region</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Startseite</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li class="nav-dropdown">
+      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
+    <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
+    <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
   </ul>
+  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <div style="background:var(--green);color:rgba(255,255,255,0.85);text-align:center;padding:9px;font-size:0.78rem;font-weight:500">
@@ -368,7 +386,7 @@
       </div>
       <p class="f-disclaimer">
         Deine Daten werden nur an geprüfte Fachbetriebe weitergegeben.
-        Kein Spam, keine Drittparteien. <a href="#">Datenschutz</a>
+        Kein Spam, keine Drittparteien. <a href="index.html">Datenschutz</a>
       </p>
     </div>
 
@@ -442,8 +460,8 @@
   <div class="footer-bottom" style="margin:0;padding:0;border:none;max-width:1100px">
     <span>© 2026 SolarRegion</span>
     <div style="display:flex;gap:20px">
-      <a href="#" style="color:rgba(255,255,255,0.4)">Impressum</a>
-      <a href="#" style="color:rgba(255,255,255,0.4)">Datenschutz</a>
+      <a href="index.html" style="color:rgba(255,255,255,0.4)">Impressum</a>
+      <a href="index.html" style="color:rgba(255,255,255,0.4)">Datenschutz</a>
     </div>
   </div>
 </footer>
@@ -576,6 +594,17 @@ function disqualify() {
   document.getElementById('fHeaderTitle').textContent = 'Leider nicht passend';
   document.getElementById('fHeaderSub').textContent   = 'Wir können dir trotzdem helfen';
 }
+</script>
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-drop-toggle').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    btn.parentElement.classList.toggle('active');
+  });
+});
 </script>
 </body>
 </html>

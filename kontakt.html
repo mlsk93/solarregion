@@ -3,23 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kontakt – SolarRegion NRW</title>
-  <meta name="description" content="Kontaktiere SolarRegion – dein Solarberater in NRW. Wir antworten innerhalb eines Werktages.">
+  <title>Kontakt – GreenHorizon Energy | SolarRegion NRW</title>
+  <meta name="description" content="Kontaktiere SolarRegion – dein Solarberater in NRW. Antonio Schmidt · info@greenhorizon-energy.de · 015150490420">
   <link rel="stylesheet" href="style.css">
+  <style>
+.nav-dropdown { position: relative; }
+.nav-dropdown-menu {
+  display: none; position: absolute; top: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%); background: #fff; border: 1px solid var(--border);
+  border-radius: 14px; padding: 10px 0; min-width: 200px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12); z-index: 200; list-style: none;
+}
+.nav-dropdown-menu li a { display:block; padding:9px 20px; font-size:0.88rem; color:var(--text)!important; transition:background .15s,color .15s; }
+.nav-dropdown-menu li a:hover { background:rgba(255,92,0,0.06); color:var(--orange)!important; }
+.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown.active .nav-dropdown-menu { display:block; }
+.footer-inner { display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr 1fr; gap:36px; max-width:1100px; margin:0 auto 48px; }
+.footer h4 { color:#fff; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px; }
+.footer ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.footer ul a { font-size:0.85rem; color:rgba(255,255,255,0.65); transition:color .2s; }
+.footer ul a:hover { color:var(--orange); }
+.footer-brand p { font-size:0.88rem; margin-top:14px; line-height:1.7; color:rgba(255,255,255,0.65); }
+@media(max-width:900px){ .footer-inner{grid-template-columns:1fr 1fr} .kontakt-grid{grid-template-columns:1fr} }
+@media(max-width:600px){ .footer-inner{grid-template-columns:1fr} }
+  </style>
 </head>
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <span class="sun-icon">☀</span>Solar<span>Region</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="solaranlage-detmold.html">Detmold</a></li>
+  <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Solar<span>Region</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li class="nav-dropdown">
+      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html" style="color:var(--orange)">Kontakt</a></li>
     <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
   </ul>
+  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü"><span></span><span></span><span></span></div>
 </nav>
 
 <div class="page-hero">
@@ -34,18 +66,34 @@
       <h3>So erreichst du uns</h3>
 
       <div class="contact-item">
+        <div class="contact-icon">👤</div>
+        <div>
+          <strong>Ansprechpartner</strong>
+          <span>Antonio Schmidt</span>
+        </div>
+      </div>
+
+      <div class="contact-item">
         <div class="contact-icon">📧</div>
         <div>
           <strong>E-Mail</strong>
-          <span>hallo@solarregion.de</span>
+          <span><a href="mailto:info@greenhorizon-energy.de" style="color:var(--orange)">info@greenhorizon-energy.de</a></span>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <strong>Telefon / WhatsApp</strong>
+          <span><a href="tel:+4915150490420" style="color:var(--orange)">015150490420</a></span>
         </div>
       </div>
 
       <div class="contact-item">
         <div class="contact-icon">📍</div>
         <div>
-          <strong>Region</strong>
-          <span>Detmold & Kreis Lippe, NRW</span>
+          <strong>Adresse</strong>
+          <span>Amselweg 29<br>32657 Lemgo, NRW</span>
         </div>
       </div>
 
@@ -57,26 +105,23 @@
         </div>
       </div>
 
-      <div style="margin-top:32px;padding:24px;background:rgba(255,92,0,0.06);border-radius:var(--radius);border-left:4px solid var(--orange)">
+      <div style="margin-top:28px;padding:20px 24px;background:rgba(255,92,0,0.06);border-radius:var(--radius);border-left:4px solid var(--orange)">
         <strong style="display:block;font-size:0.88rem;margin-bottom:8px">☀ Schneller Weg:</strong>
-        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px">Für ein konkretes Solarangebot nutze direkt unseren Solar-Check – das ist schneller als eine E-Mail!</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:14px">Für ein konkretes Solarangebot einfach den Solar-Check nutzen – das ist schneller als eine E-Mail!</p>
         <a href="solar-check.html" class="btn btn-primary btn-sm">Solar-Check starten →</a>
       </div>
     </div>
 
     <div class="kontakt-form">
       <h3>Nachricht schreiben</h3>
-
       <div class="form-group">
         <label for="k-name">Name</label>
         <input type="text" class="form-input" id="k-name" placeholder="Max Mustermann">
       </div>
-
       <div class="form-group">
         <label for="k-email">E-Mail-Adresse</label>
         <input type="email" class="form-input" id="k-email" placeholder="max@beispiel.de">
       </div>
-
       <div class="form-group">
         <label for="k-betreff">Betreff</label>
         <select class="form-select" id="k-betreff">
@@ -88,31 +133,27 @@
           <option>Sonstiges</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="k-nachricht">Nachricht</label>
         <textarea class="form-input" id="k-nachricht" rows="5" placeholder="Deine Nachricht…" style="resize:vertical"></textarea>
       </div>
-
       <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="sendKontakt()">
         📬 Nachricht senden
       </button>
-
-      <p class="disclaimer" style="margin-top:16px">
-        Deine Daten werden nur zur Beantwortung deiner Anfrage genutzt und nicht weitergegeben.
-        <a href="#" style="color:var(--orange)">Datenschutzerklärung</a>
+      <p class="disclaimer" style="margin-top:14px">
+        Deine Daten werden nur zur Beantwortung deiner Anfrage genutzt.
+        <a href="datenschutz.html" style="color:var(--orange)">Datenschutzerklärung</a>
       </p>
-
       <div id="kontakt-success" style="display:none;text-align:center;padding:24px;background:rgba(255,92,0,0.06);border-radius:var(--radius);margin-top:16px">
-        <div style="font-size:2.5rem;margin-bottom:12px">✅</div>
+        <div style="font-size:2.5rem;margin-bottom:10px">✅</div>
         <strong>Nachricht erhalten!</strong>
-        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:6px">Wir melden uns innerhalb von 24 Stunden bei dir.</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:6px">Antonio meldet sich innerhalb von 24 Stunden bei dir.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" style="padding-top:56px;padding-bottom:56px">
+<section class="section section-alt" style="padding-top:48px;padding-bottom:48px">
   <div class="cta-banner">
     <h2>Noch schneller: Solar-Check</h2>
     <p>Für ein konkretes Angebot ist der Solar-Check die schnellste Option – 2 Minuten, komplett kostenlos</p>
@@ -121,53 +162,75 @@
 </section>
 
 <footer class="footer">
-  <div class="footer-grid">
+  <div class="footer-inner">
     <div class="footer-brand">
       <div class="nav-logo" style="color:white"><span class="sun-icon">☀</span>Solar<span>Region</span></div>
-      <p>Dein regionaler Solarberater in NRW.</p>
+      <p>Dein regionaler Solarberater in NRW.<br>Wir verbinden Haushalte mit geprüften Fachbetrieben – kostenlos und unverbindlich.</p>
+      <p style="margin-top:14px;font-size:0.82rem">
+        📧 <a href="mailto:info@greenhorizon-energy.de" style="color:rgba(255,255,255,0.6)">info@greenhorizon-energy.de</a><br>
+        📞 <a href="tel:+4915150490420" style="color:rgba(255,255,255,0.6)">015150490420</a>
+      </p>
     </div>
     <div>
-      <h4>Regionen</h4>
+      <h4>Regionen OWL</h4>
       <ul>
-        <li><a href="solaranlage-detmold.html">Solaranlage Detmold</a></li>
-        <li><a href="#">Solaranlage NRW</a></li>
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Regionen NRW</h4>
+      <ul>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
       </ul>
     </div>
     <div>
       <h4>Ratgeber</h4>
       <ul>
         <li><a href="ratgeber-lohnt-sich-solar.html">Lohnt sich Solar 2026?</a></li>
+        <li><a href="solar-check.html">Solar-Check starten</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </div>
     <div>
-      <h4>Links</h4>
+      <h4>Rechtliches</h4>
       <ul>
-        <li><a href="ueber-uns.html">Über uns</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-        <li><a href="#">Impressum</a></li>
-        <li><a href="#">Datenschutz</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+        <li><a href="agb.html">AGB</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 SolarRegion</span>
-    <span>Made in NRW ☀</span>
+    <span>© 2026 GreenHorizon Energy · Antonio Schmidt · Amselweg 29, 32657 Lemgo</span>
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <a href="impressum.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">Impressum</a>
+      <a href="datenschutz.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">Datenschutz</a>
+      <a href="agb.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">AGB</a>
+    </div>
   </div>
 </footer>
 
 <script>
-  function sendKontakt() {
-    const name = document.getElementById('k-name').value.trim();
-    const email = document.getElementById('k-email').value.trim();
-    const nachricht = document.getElementById('k-nachricht').value.trim();
-    if (!name || !email || !nachricht) {
-      alert('Bitte fülle alle Pflichtfelder aus.');
-      return;
-    }
-    document.getElementById('kontakt-success').style.display = 'block';
-    document.querySelector('button[onclick="sendKontakt()"]').style.display = 'none';
-  }
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+document.querySelectorAll('.nav-drop-toggle').forEach(btn => {
+  btn.addEventListener('click', e => { e.preventDefault(); btn.parentElement.classList.toggle('active'); });
+});
+function sendKontakt() {
+  const name = document.getElementById('k-name').value.trim();
+  const email = document.getElementById('k-email').value.trim();
+  const msg = document.getElementById('k-nachricht').value.trim();
+  if (!name || !email || !msg) { alert('Bitte fülle alle Felder aus.'); return; }
+  document.getElementById('kontakt-success').style.display = 'block';
+  document.querySelector('button[onclick="sendKontakt()"]').style.display = 'none';
+}
 </script>
-
 </body>
 </html>

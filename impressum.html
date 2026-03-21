@@ -11,13 +11,29 @@
 
 <nav class="nav">
   <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Solar<span>Region</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Startseite</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li class="nav-dropdown">
+      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
     <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
   </ul>
+  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <div class="page-hero" style="padding:60px 6vw 48px">
@@ -41,7 +57,7 @@
     <h3>Kontakt</h3>
     <p>
       Telefon: 015150490420<br>
-      E-Mail: info@greenhorizon-energy.de
+      E-Mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="543d3a323b14332631313a3c3b263d2e3b3a79313a3126332d7a3031">[email&#160;protected]</a>
     </p>
 
     <h3>Umsatzsteuer-ID</h3>
@@ -118,10 +134,4 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 SolarRegion. Alle Rechte vorbehalten.</span>
-    <span>Made in NRW ☀</span>
-  </div>
-</footer>
-
-</body>
-</html>
+  

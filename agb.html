@@ -11,13 +11,29 @@
 
 <nav class="nav">
   <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Solar<span>Region</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Startseite</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li class="nav-dropdown">
+      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
     <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
   </ul>
+  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <div class="page-hero" style="padding:60px 6vw 48px">
@@ -86,12 +102,12 @@
 
     <h2>§ 8 Widerrufsrecht & Widerruf der Einwilligung</h2>
     <p>
-      Da keine kostenpflichtigen Verträge mit Nutzern geschlossen werden, besteht kein gesetzliches Widerrufsrecht im Sinne des § 355 BGB. Der Nutzer kann seine Einwilligung zur Datenweitergabe jederzeit durch eine E-Mail an info@greenhorizon-energy.de widerrufen. Eine bereits erfolgte Weitergabe an einen Fachbetrieb kann jedoch nicht rückgängig gemacht werden.
+      Da keine kostenpflichtigen Verträge mit Nutzern geschlossen werden, besteht kein gesetzliches Widerrufsrecht im Sinne des § 355 BGB. Der Nutzer kann seine Einwilligung zur Datenweitergabe jederzeit durch eine E-Mail an <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e272028210e293c2b2b2026213c27342120632b202b3c2937602a2b">[email&#160;protected]</a> widerrufen. Eine bereits erfolgte Weitergabe an einen Fachbetrieb kann jedoch nicht rückgängig gemacht werden.
     </p>
 
     <h2>§ 9 Änderungen der AGB</h2>
     <p>
-      SolarRegion behält sich das Recht vor, diese AGB jederzeit mit Wirkung für die Zukunft zu ändern. Die jeweils aktuelle Version ist unter solarregion.de/agb einsehbar.
+      SolarRegion behält sich das Recht vor, diese AGB jederzeit mit Wirkung für die Zukunft zu ändern. Die jeweils aktuelle Version ist unter greenhorizon-energy.de/agb einsehbar.
     </p>
 
     <h2>§ 10 Anwendbares Recht & Gerichtsstand</h2>
@@ -140,10 +156,4 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 SolarRegion. Alle Rechte vorbehalten.</span>
-    <span>Made in NRW ☀</span>
-  </div>
-</footer>
-
-</body>
-</html>
+  

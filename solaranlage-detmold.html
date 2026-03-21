@@ -11,16 +11,30 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <span class="sun-icon">☀</span>Solar<span>Region</span>
-  </a>
+  <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Solar<span>Region</span></a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="solaranlage-detmold.html" style="color:var(--orange)">Detmold</a></li>
+    <li class="nav-dropdown">
+      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
     <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
   </ul>
+  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
 <!-- PAGE HERO -->
@@ -215,42 +229,72 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-grid">
+  <div class="footer-inner">
     <div class="footer-brand">
       <div class="nav-logo" style="color:white"><span class="sun-icon">☀</span>Solar<span>Region</span></div>
-      <p>Dein regionaler Solarberater in NRW. Wir verbinden Haushalte mit geprüften Fachbetrieben.</p>
+      <p>Dein regionaler Solarberater in NRW.<br>Wir verbinden Haushalte mit geprüften Fachbetrieben – kostenlos und unverbindlich.</p>
+      <p style="margin-top:14px;font-size:0.82rem">
+        📧 <a href="mailto:info@greenhorizon-energy.de" style="color:rgba(255,255,255,0.6)">info@greenhorizon-energy.de</a><br>
+        📞 <a href="tel:+4915150490420" style="color:rgba(255,255,255,0.6)">015150490420</a>
+      </p>
     </div>
     <div>
-      <h4>Regionen</h4>
+      <h4>Regionen OWL</h4>
       <ul>
-        <li><a href="solaranlage-detmold.html">Solaranlage Detmold</a></li>
-        <li><a href="#">Solaranlage Lemgo</a></li>
-        <li><a href="#">Solaranlage Lippe</a></li>
-        <li><a href="#">Solaranlage NRW</a></li>
+        <li><a href="solaranlage-detmold.html">Detmold</a></li>
+        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
+        <li><a href="solaranlage-herford.html">Herford</a></li>
+        <li><a href="solaranlage-minden.html">Minden</a></li>
+        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Regionen NRW</h4>
+      <ul>
+        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
       </ul>
     </div>
     <div>
       <h4>Ratgeber</h4>
       <ul>
         <li><a href="ratgeber-lohnt-sich-solar.html">Lohnt sich Solar 2026?</a></li>
-        <li><a href="#">Kosten einer Solaranlage</a></li>
-        <li><a href="#">Förderung NRW Solar</a></li>
+        <li><a href="solar-check.html">Solar-Check starten</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </div>
     <div>
       <h4>Rechtliches</h4>
       <ul>
-        <li><a href="#">Impressum</a></li>
-        <li><a href="#">Datenschutz</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+        <li><a href="datenschutz.html">Datenschutz</a></li>
+        <li><a href="agb.html">AGB</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 SolarRegion. Alle Rechte vorbehalten.</span>
-    <span>Made in NRW ☀</span>
+    <span>© 2026 GreenHorizon Energy · Antonio Schmidt · Amselweg 29, 32657 Lemgo</span>
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <a href="impressum.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">Impressum</a>
+      <a href="datenschutz.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">Datenschutz</a>
+      <a href="agb.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">AGB</a>
+    </div>
   </div>
 </footer>
 
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-drop-toggle').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    btn.parentElement.classList.toggle('active');
+  });
+});
+</script>
 </body>
 </html>
