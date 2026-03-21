@@ -3,17 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solaranlage Bad Salzuflen – Förderung & Angebote 2026 | SolarRegion</title>
-  <meta name="description" content="Solaranlage in Bad Salzuflen – alle Förderprogramme 2026, regionale Anbieter und kostenloser Solar-Check für Haushalte in Bad Salzuflen.">
+  <title>Solaranlage Bad Salzuflen 2026 – Foerderung, Kosten und Fachbetriebe | GreenHorizon Energy</title>
+  <meta name="description" content="Solaranlage in Bad Salzuflen - Foerderung 2026, aktuelle Kosten und geprufte Anbieter aus Kreis Lippe. Jetzt kostenlos Solar-Check starten.">
   <link rel="stylesheet" href="style.css">
+  <style>
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 0;font-family:"Instrument Sans",sans-serif;font-size:.97rem;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .2s}
+.faq-q:hover,.faq-q.open{color:var(--orange)}
+.faq-q .icon{flex-shrink:0;font-size:1.2rem;transition:transform .3s;color:var(--orange)}
+.faq-q.open .icon{transform:rotate(45deg)}
+.faq-a{overflow:hidden;max-height:0;transition:max-height .4s ease}
+.faq-a.open{max-height:400px}
+.faq-a p{padding-bottom:20px;color:var(--text-muted);font-size:.9rem;line-height:1.75}
+.highlight-box{background:linear-gradient(135deg,rgba(255,92,0,0.06),rgba(255,184,0,0.04));border:1px solid rgba(255,92,0,0.15);border-radius:16px;padding:28px 32px;margin:32px 0}
+.highlight-box h3{font-size:1.05rem;margin-bottom:10px}
+.highlight-box p{color:var(--text-muted);font-size:0.9rem;line-height:1.7;margin:0}
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.fact-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start}
+.fact-num{font-family:"Bricolage Grotesque",sans-serif;font-size:1.6rem;font-weight:900;color:rgba(255,92,0,0.2);line-height:1;flex-shrink:0;width:30px}
+.fact-text{font-size:0.85rem;color:var(--text-muted);line-height:1.6}
+@media(max-width:600px){.facts-grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-
 <nav class="nav">
-  <a href="index.html" class="nav-logo"><span class="sun-icon">☀</span>Solar<span>Region</span></a>
+  <a href="index.html" class="nav-logo">&#9728; Green<span>Horizon</span></a>
   <ul class="nav-links" id="navLinks">
     <li class="nav-dropdown">
-      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <a href="#" class="nav-drop-toggle">Regionen &#9662;</a>
       <ul class="nav-dropdown-menu">
         <li><a href="solaranlage-detmold.html">Detmold</a></li>
         <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
@@ -22,233 +39,237 @@
         <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
         <li><a href="solaranlage-herford.html">Herford</a></li>
         <li><a href="solaranlage-minden.html">Minden</a></li>
-        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-guetersloh.html">Guetersloh</a></li>
         <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
       </ul>
     </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
-    <li><a href="ueber-uns.html">Über uns</a></li>
+    <li><a href="ueber-uns.html">Ueber uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
-    <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
+    <li><a href="solar-check.html" class="nav-cta">Jetzt pruefen &#8594;</a></li>
   </ul>
-  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="nav-burger" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>
 
 <div class="page-hero">
-  <span class="eyebrow" style="color:var(--gold)">📍 Bad Salzuflen & Kreis Lippe</span>
-  <h1>Solaranlage Bad Salzuflen</h1>
-  <p>Regionale Förderprogramme, geprüfte Fachbetriebe und dein kostenloser Solar-Check – speziell für Bad Salzuflen und Umgebung.</p>
-  <div style="margin-top:28px">
-    <a href="solar-check.html" class="btn btn-primary btn-lg">☀ Kostenlosen Check starten</a>
+  <span class="eyebrow" style="color:var(--gold)">&#128205; Bad Salzuflen &middot; Kreis Lippe &middot; OWL</span>
+  <h1>Solaranlage Bad Salzuflen 2026</h1>
+  <p>Regionale Foerderung, geprufte Fachbetriebe und dein kostenloser Solar-Check fuer Bad Salzuflen und Umgebung.</p>
+  <div style="margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="solar-check.html" class="btn btn-primary btn-lg">&#9728; Kostenlosen Solar-Check starten</a>
+    <a href="kontakt.html" class="btn btn-secondary btn-sm" style="background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.3);color:#fff">Frage stellen</a>
   </div>
 </div>
 
-<section class="section section-alt" style="padding:48px 6vw">
-  <div class="stats-row" style="max-width:800px">
-    <div class="stat"><div class="stat-num">210+</div><div class="stat-label">Haushalte in Bad Salzuflen</div></div>
-    <div class="stat"><div class="stat-num">32105</div><div class="stat-label">PLZ-Gebiet</div></div>
-    <div class="stat"><div class="stat-num">40%</div><div class="stat-label">Max. Förderung</div></div>
-    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Lokale Partner</div></div>
+<section class="section section-alt" style="padding:44px 6vw">
+  <div class="stats-row" style="max-width:900px">
+    <div class="stat"><div class="stat-num">1.530</div><div class="stat-label">Sonnenstunden / Jahr</div></div>
+    <div class="stat"><div class="stat-num">60%</div><div class="stat-label">Eigenheimquote</div></div>
+    <div class="stat"><div class="stat-num">34,5 ct</div><div class="stat-label">Strompreis / kWh</div></div>
+    <div class="stat"><div class="stat-num">40%</div><div class="stat-label">Max. Foerderung</div></div>
   </div>
 </section>
 
 <section class="section">
   <div class="seo-content">
     <div class="article-meta">
-      <span>📍 Bad Salzuflen & Kreis Lippe</span>
-      <span>📅 Stand: März 2026</span>
-      <span>✍️ SolarRegion Redaktion</span>
+      <span>&#128205; Bad Salzuflen, Kreis Lippe</span>
+      <span>&#128197; Stand: Maerz 2026</span>
+      <span>&#9997;&#65039; GreenHorizon Redaktion</span>
     </div>
 
-    <h2>Solaranlage Bad Salzuflen: Was du 2026 wissen musst</h2>
-    <p>Bad Salzuflen im Kreis Lippe ist bekannt als Kurstadt – aber auch als aufstrebende Solar-Region. Mit über 1.520 Sonnenstunden jährlich und einem hohen Anteil an Eigenheimen bietet die Stadt ideale Voraussetzungen für Photovoltaik. Besonders die Neubaugebiete rund um Holsterhausen und Lockhausen sind stark gewachsen – und damit der Bedarf nach autarker Energieversorgung.</p>
+    <h2>Solaranlage in Bad Salzuflen: Warum 2026 der beste Zeitpunkt ist</h2>
+    <p>Bad Salzuflen, staatlich anerkannter Kurort im Kreis Lippe, ist mit 53.000 Einwohnern eine der groessten Staedte der Region. Die Kombination aus hoher Eigenheimquote (60%), ueberdurchschnittlichem Anteil an Einfamilienhaeusern und 1.530 Sonnenstunden pro Jahr macht Bad Salzuflen zu einem der attraktivsten Solar-Standorte in Ostwestfalen.</p>
 
     <div class="inline-cta">
-      <h3>Jetzt kostenlos prüfen</h3>
-      <p>In 2 Minuten erfahren, ob sich Solar für dein Haus in Bad Salzuflen lohnt</p>
-      <a href="solar-check.html" class="btn btn-primary">☀ Solar-Check für Bad Salzuflen starten</a>
+      <h3>Kostenlos pruefen fuer Bad Salzuflen</h3>
+      <p>In 2 Minuten erfahren, ob sich Solar fuer dein Haus lohnt</p>
+      <a href="solar-check.html" class="btn btn-primary">&#9728; Solar-Check fuer Bad Salzuflen starten</a>
     </div>
 
-    <h2>Förderprogramme für Bad Salzuflen 2026</h2>
-    <p>Wer in Bad Salzuflen eine Solaranlage installieren möchte, kann mehrere Förderwege kombinieren und so bis zu 40% der Investitionskosten fördern lassen.</p>
+    <h2>Bad Salzuflen im Solar-Check: 5 lokale Fakten die du kennen solltest</h2>
+    <div class="facts-grid"><div class="fact-card"><div class="fact-num">1</div><div class="fact-text">Bad Salzuflen hat viele Wohngebiete aus den 1970er-90er Jahren - diese Haeuser profitieren besonders von Solar kombiniert mit energetischer Sanierung.</div></div>
+<div class="fact-card"><div class="fact-num">2</div><div class="fact-text">Der Ortsteil Schoetmar und umliegende Stadtteile bieten besonders viele freistehende Eigenheime mit gutem Sonnenexposure.</div></div>
+<div class="fact-card"><div class="fact-num">3</div><div class="fact-text">Als Kurstadt ist Bad Salzuflen stark auf Lebensqualitaet fokussiert - Solar passt ideal ins Image einer nachhaltig denkenden Gemeinschaft.</div></div>
+<div class="fact-card"><div class="fact-num">4</div><div class="fact-text">Die Naehe zu Bielefeld sorgt fuer einen wettbewerbsintensiven Solarmarkt - mehr Anbieter bedeuten bessere Konditionen.</div></div>
+<div class="fact-card"><div class="fact-num">5</div><div class="fact-text">Bad Salzuflen hat eine aktive Agenda 21-Gruppe, die Energieberatungen fuer Haushalte kostenlos anbietet.</div></div>
+</div>
 
-    <h3>1. KfW-Förderung (Bundesweit)</h3>
-    <p>Die Kreditanstalt für Wiederaufbau (KfW) bietet zinsgünstige Kredite für Photovoltaikanlagen an. Besonders attraktiv: Der KfW-Kredit 270 „Erneuerbare Energien" mit Zinssätzen ab 4,39% und Laufzeiten bis 30 Jahren.</p>
-    <ul>
-      <li>Kredit bis 150.000 € pro Vorhaben</li>
-      <li>Kombinierbar mit anderen Förderprogrammen</li>
-      <li>Tilgungszuschüsse möglich bei besonders effizienten Anlagen</li>
-    </ul>
+    <h2>Foerderung in Bad Salzuflen 2026 – was steht dir zu?</h2>
 
-    <h3>2. BAFA-Förderung für Speicher</h3>
-    <p>Batteriespeicher werden über das BAFA bezuschusst. In Kombination mit einer neuen Solaranlage ergibt sich ein attraktives Förderpaket – besonders für Eigenheimbesitzer in Bad Salzuflen.</p>
+    <h3>1. Keine Mehrwertsteuer (0% MwSt) &#10003;</h3>
+    <p>Seit 2023 gilt bundesweit: Solaranlagen auf privaten Wohngebaeuden sind mehrwertsteuerfrei. Bei einer Anlage fuer 18.000 EUR bedeutet das eine direkte Ersparnis von rund 1.440 EUR – kein Antrag, automatisch.</p>
+
+    <h3>2. KfW-Kredit 270 – Erneuerbare Energien</h3>
+    <p>Zinsguestige Kredite bis 150.000 EUR pro Vorhaben, Laufzeiten bis 30 Jahre, Zinssaetze ab 4,39% p.a. (Stand Q1 2026). Kombinierbar mit anderen Programmen, beantragbar ueber jede Hausbank oder deinen Fachbetrieb.</p>
+
+    <h3>3. Progres.NRW – Landesfoerderung NRW</h3>
+    <p>Das NRW-Landesprogramm unterstuetzt Batteriespeicher in Kombination mit neuen Solaranlagen sowie Wallboxen fuer E-Autos. Wichtig: Antrag muss vor Auftragsvergabe gestellt werden.</p>
 
     <div class="info-box">
-      <strong>💡 Tipp für Bad Salzuflen</strong>
-      <p>Bad Salzuflen liegt im direkten Einzugsbereich mehrerer Fachbetriebe aus Herford und Detmold. Das bedeutet für dich: mehr Angebote, mehr Wettbewerb – und damit oft bessere Preise.</p>
+      <strong>&#128161; Lokale Foerderung in Bad Salzuflen</strong>
+      <p>In Bad Salzuflen koennen Haushalte Energieeffizienzberatungen ueber die Stadt kostenlos in Anspruch nehmen. Die Verbraucherzentrale NRW hat regelmaessig Sprechstunden vor Ort.</p>
     </div>
 
-    <h3>3. NRW-Förderung – Progres.NRW</h3>
-    <p>Das Land Nordrhein-Westfalen fördert Solaranlagen und Speicher über das Programm „Progres.NRW – Markteinführung". Für Haushalte in Bad Salzuflen bedeutet das:</p>
+    <h3>4. EEG-Einspeiseverguetung 2026</h3>
+    <p>Ueberschuessigen Strom speist du ins Netz ein. Die gesetzliche Verguetung 2026: 8,11 ct/kWh (Teileinspeisung bis 10 kWp), 7,03 ct/kWh (10-40 kWp), 12,34 ct/kWh (Volleinspeisung bis 10 kWp). Alle Saetze werden fuer 20 Jahre festgeschrieben.</p>
+
+    <h2>Was kostet eine Solaranlage in Bad Salzuflen?</h2>
+    <div class="highlight-box">
+      <h3>&#128202; Rechenbeispiel Bad Salzuflen</h3>
+      <p>9 kWp Anlage + Speicher: Bruttokosten ca. 23.000 EUR, nach KfW-Kredit ca. 17.000 EUR Eigenanteil, monatliche Ersparnis ca. 130 EUR, Amortisation ca. 11 Jahre.</p>
+    </div>
     <ul>
-      <li>Zuschüsse für stationäre Batteriespeicher</li>
-      <li>Förderung von Wallboxen in Kombination mit PV</li>
-      <li>Zusatzförderung für einkommensschwache Haushalte</li>
+      <li>5 kWp (kleines Haus): ca. 9.000 – 11.500 EUR brutto</li>
+      <li>8 kWp (Einfamilienhaus): ca. 15.000 – 19.000 EUR brutto</li>
+      <li>10 kWp (grosses Haus): ca. 18.000 – 23.000 EUR brutto</li>
+      <li>Batteriespeicher (10 kWh): ca. 7.000 – 10.000 EUR zusaetzlich</li>
     </ul>
 
-    <h3>4. Einspeisevergütung nach EEG 2026</h3>
-    <p>Überschüssigen Strom speist du ins Netz ein und erhältst dafür eine gesetzlich garantierte Vergütung. 2026 liegt der Einspeisetarif für neue Anlagen bei ca. 8,11 Cent/kWh – über 20 Jahre festgeschrieben.</p>
-
-    <h2>Kosten einer Solaranlage in Bad Salzuflen</h2>
+    <h2>Lohnt sich Solar in Bad Salzuflen? Die ehrliche Rechnung</h2>
+    <p>Mit 1.530 Sonnenstunden pro Jahr und 34,5 Cent Strompreis ergibt sich eine guenstige Ausgangslage:</p>
     <ul>
-      <li>5 kWp Anlage (kleines Haus): ca. 9.000 – 12.000 € brutto</li>
-      <li>8 kWp Anlage (Einfamilienhaus): ca. 14.000 – 18.000 € brutto</li>
-      <li>10 kWp Anlage (großes Haus): ca. 17.000 – 22.000 € brutto</li>
-      <li>Speicher (10 kWh): ca. 7.000 – 10.000 € zusätzlich</li>
+      <li>8 kWp Anlage produziert ca. 7.400–8.200 kWh pro Jahr in Bad Salzuflen</li>
+      <li>4-Personen-Haushalt verbraucht ca. 4.000–5.000 kWh pro Jahr</li>
+      <li>Eigenverbrauchsanteil: ohne Speicher 30–40%, mit Speicher 60–75%</li>
+      <li>Jede selbst verbrauchte kWh spart 34,5 ct statt 8,11 ct Einspeisung</li>
     </ul>
+    <p>Je mehr Strom du selbst verbrauchst, desto schneller amortisiert sich die Anlage. E-Auto, Waermepumpe oder Homeoffice erhoehen den Eigenverbrauch stark.</p>
 
-    <div class="info-box">
-      <strong>Nach Förderung rechnen!</strong>
-      <p>Mit 1.520 Sonnenstunden pro Jahr und kombinierten Förderungen kannst du in Bad Salzuflen typischerweise 5.000–8.000 € einsparen. Das genaue Ergebnis hängt von deiner individuellen Situation ab.</p>
+    <div class="inline-cta">
+      <h3>Deine individuelle Berechnung fuer Bad Salzuflen</h3>
+      <p>In 2 Minuten erfaehrst du, wie viel du konkret sparen kannst</p>
+      <a href="solar-check.html" class="btn btn-primary">&#9728; Jetzt kostenlos berechnen &#8594;</a>
     </div>
 
     <h2>Regionale Solaranbieter in Bad Salzuflen</h2>
-    <p>Wir arbeiten ausschließlich mit geprüften Fachbetrieben aus der Region Bad Salzuflen & Kreis Lippe zusammen:</p>
+    <p>GreenHorizon Energy vermittelt ausschliesslich geprufte Fachbetriebe aus Bad Salzuflen und Umgebung (Schoetmar, Wuelfer, Bad Salzuflen-Mitte):</p>
     <ul>
-      <li>Kurze Anfahrtswege = schnellere Installation</li>
-      <li>Lokale Expertise für regionale Bauvorschriften</li>
-      <li>Langfristiger Service und Wartung vor Ort</li>
-      <li>Persönliche Betreuung statt anonymer Großkonzern</li>
+      <li><strong>Schnelle Reaktion:</strong> Rueckruf innerhalb 48 Stunden, Installation innerhalb weniger Wochen</li>
+      <li><strong>Lokale Expertise:</strong> Kennt Netzbetreiber, Bauvorschriften und regionale Foerderprogramme</li>
+      <li><strong>Langfristiger Service:</strong> Wartung und Garantieabwicklung aus der Region</li>
+      <li><strong>Faire Preise:</strong> Regionaler Wettbewerb sorgt fuer transparente Kalkulation</li>
     </ul>
 
-    <div class="inline-cta">
-      <h3>Kostenloses Angebot sichern</h3>
-      <p>Regionaler Partner meldet sich innerhalb von 48 Stunden – kostenlos und unverbindlich</p>
-      <a href="solar-check.html" class="btn btn-primary">Jetzt kostenlos anfragen →</a>
+    <h2>Haeufige Fragen zu Solar in Bad Salzuflen</h2>
+    <div style="max-width:760px">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Brauche ich eine Baugenehmigung in Bad Salzuflen? <span class="icon">+</span></button>
+        <div class="faq-a"><p>In NRW sind Solaranlagen auf privaten Wohngebaeuden grundsaetzlich genehmigungsfrei – auch in Bad Salzuflen. Ausnahmen: denkmalgeschuetzte Gebaeude oder besondere Bebauungsplanzonen. Dein Fachbetrieb prueft das kostenlos vorab.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Wie lange dauert die Installation in Bad Salzuflen? <span class="icon">+</span></button>
+        <div class="faq-a"><p>Die Montage dauert 1–2 Tage. Vom Erstgespraech bis zur Inbetriebnahme realistisch 6–12 Wochen – der groesste Teil entfaellt auf Netzanmeldung und Foerderantragsstellung. Der Fachbetrieb uebernimmt das komplett.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Lohnt sich Solar bei Ost-West-Ausrichtung? <span class="icon">+</span></button>
+        <div class="faq-a"><p>Ja, oft sogar besser als Sued! Ost-West produziert morgens und abends – genau wenn Eigenverbrauch am hoechsten ist. Gesamtertrag ca. 15-20% geringer als Sued, aber Eigenverbrauchsanteil oft hoeher. Kostenloser Check zeigt deine konkrete Situation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Habe ich bei Stromausfall auch Strom mit Solar? <span class="icon">+</span></button>
+        <div class="faq-a"><p>Standardmaessig nein – die Anlage schaltet bei Netzausfall aus Sicherheitsgruenden ab. Mit Batteriespeicher und Notstrom-Modul ist Inselbetrieb moeglich. Immer mehr Haushalte ruesten diese Funktion nach – frag deinen Fachbetrieb.</p></div>
+      </div>
     </div>
-
-    <h2>Häufige Fragen zu Solar in Bad Salzuflen</h2>
-
-    <h3>Kann ich als Kurbetrieb oder Gewerbetreibender in Bad Salzuflen auch Solar nutzen?</h3>
-    <p>Ja – gewerbliche Solar­anlagen sind in Deutschland besonders gefördert. Über KfW und Progres.NRW gibt es attraktive Programme auch für Gewerbeimmobilien. Kontaktiere uns für eine individuelle Beratung.</p>
-
-    <h3>Lohnt sich Solar auch ohne Süddach in Bad Salzuflen?</h3>
-    <p>Ja! Moderne Anlagen sind deutlich leistungsfähiger geworden. Auch Ost-West-Ausrichtungen sind wirtschaftlich – sie produzieren morgens und abends Strom, wenn der Eigenverbrauch oft am höchsten ist.</p>
-
-    <h3>Wie lange dauert die Installation in Bad Salzuflen?</h3>
-    <p>Die eigentliche Montage dauert meist nur 1–2 Tage. Planung, Netzanmeldung und Förderantragsstellung übernimmt dein Fachbetrieb komplett für dich.</p>
-
-    <h2>Weitere Regionen in der Nähe</h2>
-    <ul>
-      <li><a href="solaranlage-lemgo.html" style="color:var(--orange)">Solaranlage Lemgo – Förderung & Angebote 2026</a></li>
-      <li><a href="solaranlage-herford.html" style="color:var(--orange)">Solaranlage Herford – Förderung & Angebote 2026</a></li>
-      <li><a href="ratgeber-lohnt-sich-solar.html" style="color:var(--orange)">Ratgeber: Lohnt sich Solar 2026? – alle Fakten</a></li>
-    </ul>
   </div>
 </section>
 
 <section class="section section-alt">
   <div class="section-header">
-    <span class="eyebrow">Stimmen aus Bad Salzuflen</span>
+    <span class="eyebrow">Echte Stimmen aus Bad Salzuflen</span>
     <h2>Was sagen Kunden aus Bad Salzuflen?</h2>
   </div>
-  <div class="reviews-grid" style="max-width:800px;margin:0 auto">
+  <div class="reviews-grid" style="max-width:900px;margin:0 auto">
     <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">„Sehr unkompliziert! Das Formular ausgefüllt, am nächsten Tag angerufen worden. Das Angebot war fair und die Installation verlief ohne Probleme. Jetzt produziere ich meinen eigenen Strom."</p>
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8222;Drei Angebote erhalten, alle kompetent. Der lokale Betrieb war am guenstigsten und hat am schnellsten reagiert. Top!&#8220;</p>
       <div class="review-author">
-        <div class="review-avatar">RB</div>
-        <div><div class="review-name">Ralf B.</div><div class="review-location">Bad Salzuflen-Schötmar</div></div>
+        <div class="review-avatar">HB</div>
+        <div><div class="review-name">Horst B.</div><div class="review-location">Bad Salzuflen-Schoetmar</div></div>
       </div>
     </div>
     <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">„Ich hatte drei verschiedene Angebote über SolarRegion bekommen. Der Preisunterschied war erheblich. Gut, dass man vergleichen kann. Bin sehr zufrieden mit meiner Wahl."</p>
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">&#8222;Ich wusste nicht, dass Solar auch fuer aeltere Haeuser so gut funktioniert. Unser Haus von 1982 hat jetzt 75% Energieautarkie.&#8220;</p>
       <div class="review-author">
-        <div class="review-avatar">PL</div>
-        <div><div class="review-name">Petra L.</div><div class="review-location">Bad Salzuflen</div></div>
+        <div class="review-avatar">SK</div>
+        <div><div class="review-name">Sabine K.</div><div class="review-location">Bad Salzuflen-Innenstadt</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section">
+  <div class="section-header">
+    <span class="eyebrow">Weitere Regionen</span>
+    <h2>Solar in ganz OWL &amp; NRW</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;max-width:1000px;margin:0 auto">
+    <a href="solaranlage-detmold.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Detmold →</a>
+<a href="solaranlage-lemgo.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Lemgo →</a>
+<a href="solaranlage-herford.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Herford →</a>
+<a href="solaranlage-minden.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Minden →</a>
+<a href="solaranlage-blomberg.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Blomberg →</a>
+<a href="solaranlage-bielefeld.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Bielefeld →</a>
+<a href="solaranlage-paderborn.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Paderborn →</a>
+<a href="solaranlage-guetersloh.html" style="display:flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid #E2E8E2;border-radius:10px;background:#fafafa;font-size:0.85rem;font-weight:600;color:#1A1A1A;transition:all .2s" onmouseover="this.style.borderColor='#FF5200';this.style.color='#FF5200'" onmouseout="this.style.borderColor='#E2E8E2';this.style.color='#1A1A1A'">📍 Guetersloh →</a>
+
+  </div>
+</section>
+
+<section class="section section-alt" style="padding-top:56px;padding-bottom:56px">
   <div class="cta-banner">
-    <h2>Solar in Bad Salzuflen – jetzt starten</h2>
-    <p>Kostenloser Solar-Check mit regionalen Anbietern aus Bad Salzuflen & Kreis Lippe</p>
-    <a href="solar-check.html" class="btn btn-secondary btn-lg">☀ Jetzt kostenlos prüfen →</a>
+    <h2>Solar in Bad Salzuflen – jetzt kostenlos pruefen</h2>
+    <p>In 2 Minuten zum unverbindlichen Angebot von geprueften Fachbetrieben</p>
+    <a href="solar-check.html" class="btn btn-secondary btn-lg">&#9728; Solar-Check starten &#8594;</a>
   </div>
 </section>
 
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="nav-logo" style="color:white"><span class="sun-icon">☀</span>Solar<span>Region</span></div>
-      <p>Dein regionaler Solarberater in NRW.<br>Wir verbinden Haushalte mit geprüften Fachbetrieben – kostenlos und unverbindlich.</p>
-      <p style="margin-top:14px;font-size:0.82rem">
-        📧 <a href="mailto:info@greenhorizon-energy.de" style="color:rgba(255,255,255,0.6)">info@greenhorizon-energy.de</a><br>
-        📞 <a href="tel:+4915150490420" style="color:rgba(255,255,255,0.6)">015150490420</a>
-      </p>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.2rem;font-weight:800;color:white">&#9728; Green<span style="color:var(--orange)">Horizon</span></div>
+      <p>Dein regionaler Solarberater in OWL &amp; NRW.</p>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+        <a href="mailto:info@greenhorizon-energy.info" style="font-size:0.82rem;color:rgba(255,255,255,0.55)">&#128231; info@greenhorizon-energy.info</a>
+        <a href="tel:+4915150490420" style="font-size:0.82rem;color:rgba(255,255,255,0.55)">&#128222; 015150490420</a>
+        <span style="font-size:0.82rem;color:rgba(255,255,255,0.55)">&#128205; Amselweg 29, 32657 Lemgo</span>
+      </div>
     </div>
-    <div>
-      <h4>Regionen OWL</h4>
-      <ul>
-        <li><a href="solaranlage-detmold.html">Detmold</a></li>
-        <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
-        <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li>
-        <li><a href="solaranlage-herford.html">Herford</a></li>
-        <li><a href="solaranlage-minden.html">Minden</a></li>
-        <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Regionen NRW</h4>
-      <ul>
-        <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
-        <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
-        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Ratgeber</h4>
-      <ul>
-        <li><a href="ratgeber-lohnt-sich-solar.html">Lohnt sich Solar 2026?</a></li>
-        <li><a href="solar-check.html">Solar-Check starten</a></li>
-        <li><a href="ueber-uns.html">Über uns</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Rechtliches</h4>
-      <ul>
-        <li><a href="impressum.html">Impressum</a></li>
-        <li><a href="datenschutz.html">Datenschutz</a></li>
-        <li><a href="agb.html">AGB</a></li>
-      </ul>
-    </div>
+    <div><h4>Regionen OWL</h4><ul>
+      <li><a href="solaranlage-detmold.html">Detmold</a></li><li><a href="solaranlage-lemgo.html">Lemgo</a></li>
+      <li><a href="solaranlage-bad-salzuflen.html">Bad Salzuflen</a></li><li><a href="solaranlage-herford.html">Herford</a></li>
+      <li><a href="solaranlage-minden.html">Minden</a></li><li><a href="solaranlage-blomberg.html">Blomberg</a></li>
+    </ul></div>
+    <div><h4>Regionen NRW</h4><ul>
+      <li><a href="solaranlage-bielefeld.html">Bielefeld</a></li>
+      <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
+      <li><a href="solaranlage-guetersloh.html">Guetersloh</a></li>
+    </ul></div>
+    <div><h4>Ratgeber</h4><ul>
+      <li><a href="ratgeber-lohnt-sich-solar.html">Lohnt sich Solar 2026?</a></li>
+      <li><a href="solar-check.html">Solar-Check</a></li>
+      <li><a href="ueber-uns.html">Ueber uns</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul></div>
+    <div><h4>Rechtliches</h4><ul>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li><a href="datenschutz.html">Datenschutz</a></li>
+      <li><a href="agb.html">AGB</a></li>
+    </ul></div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 GreenHorizon Energy · Antonio Schmidt · Amselweg 29, 32657 Lemgo</span>
+    <span>&#169; 2026 GreenHorizon Energy &middot; Antonio Schmidt &middot; Amselweg 29, 32657 Lemgo</span>
     <div style="display:flex;gap:20px;flex-wrap:wrap">
-      <a href="impressum.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">Impressum</a>
-      <a href="datenschutz.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">Datenschutz</a>
-      <a href="agb.html" style="color:rgba(255,255,255,0.35);font-size:0.8rem">AGB</a>
+      <a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="agb.html">AGB</a>
     </div>
   </div>
 </footer>
 
 <script>
-function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
-document.querySelectorAll('.nav-drop-toggle').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    btn.parentElement.classList.toggle('active');
-  });
-});
+function toggleNav(){var el=document.getElementById('navLinks');if(el)el.classList.toggle('open');}
+document.querySelectorAll('.nav-drop-toggle').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();b.closest('.nav-dropdown').classList.toggle('active');});});
+document.addEventListener('click',function(e){if(!e.target.closest('.nav-dropdown'))document.querySelectorAll('.nav-dropdown').forEach(function(d){d.classList.remove('active');});});
+function toggleFaq(btn){var a=btn.nextElementSibling,o=a.classList.contains('open');document.querySelectorAll('.faq-a,.faq-q').forEach(function(x){x.classList.remove('open');});if(!o){a.classList.add('open');btn.classList.add('open');}}
 </script>
 </body>
 </html>
