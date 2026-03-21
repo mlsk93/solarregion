@@ -346,8 +346,8 @@
 
     <!-- ── STEP 3 ── -->
     <div class="f-step" id="fStep3">
-      <p class="f-question">Wie hoch sind deine monatlichen Stromkosten?</p>
-      <p class="f-sub">Der wichtigste Faktor für deine persönliche Ersparnis</p>
+      <p class="f-question" id="step3question">Wie hoch sind deine monatlichen Energiekosten?</p>
+      <p class="f-sub" id="step3sub">Strom- und Heizkosten zusammen – Basis für deine Ersparnis</p>
       <div class="f-choices">
         <button class="f-choice" onclick="selectAndNext(this,3,'strom','unter 100 €',0)">
           <span class="f-choice-icon">💡</span>
@@ -370,7 +370,7 @@
           <span class="f-check">✓</span>
         </button>
       </div>
-      <div class="f-nav"><button class="f-btn-back" onclick="showStep(2)">← Zurück</button></div>
+      <div class="f-nav"><button class="f-btn-back" onclick="showStep(S.answers.produkt==='Wärmepumpe' ? 1 : 2)">← Zurück</button></div>
     </div>
 
     <!-- ── STEP 4 ── -->
@@ -526,18 +526,18 @@
   </div>
 </div>
 
-<div style="background:#F4F7F4;border-top:1px solid #E2E8E2;padding:14px;text-align:center;font-size:0.78rem;color:#6B7A6B">Antonio Schmidt · GreenHorizon Energy · Amselweg 29, 32657 Lemgo · <a href="tel:+4915150490420" style="color:var(--orange)">015150490420</a> · <a href="/cdn-cgi/l/email-protection#bed7d0d8d1fed9ccdbdbd0d6d1ccd7c4d1d093dbd0dbccd9c790d7d0d8d1" style="color:var(--orange)"><span class="__cf_email__" data-cfemail="167f7870795671647373787e79647f6c79783b73787364716f387f787079">info@greenhorizon-energy.info</span></a></div>
+<div style="background:#F4F7F4;border-top:1px solid #E2E8E2;padding:14px;text-align:center;font-size:0.78rem;color:#6B7A6B">Antonio Schmidt · GreenHorizon Energy · Amselweg 29, 32657 Lemgo · <a href="tel:+4915150490420" style="color:var(--orange)">015150490420</a> · <a href="/cdn-cgi/l/email-protection#bed7d0d8d1fed9ccdbdbd0d6d1ccd7c4d1d093dbd0dbccd9c790d7d0d8d1" style="color:var(--orange)"><span class="__cf_email__" data-cfemail="167f7870795671647373787e79647f6c79783b73787364716f387f787079"><span class="__cf_email__" data-cfemail="8ae3e4ece5caedf8efefe4e2e5f8e3f0e5e4a7efe4eff8edf3a4e3e4ece5">[email&#160;protected]</span></span></a></div>
 <footer class="footer" style="padding:24px 6vw">
   <div class="footer-bottom" style="margin:0;padding:0;border:none;max-width:1100px">
     <span>© 2026 GreenHorizon</span>
     <div style="display:flex;gap:20px">
-      <a href="index.html" style="color:rgba(255,255,255,0.4)">Impressum</a>
-      <a href="index.html" style="color:rgba(255,255,255,0.4)">Datenschutz</a>
+      <a href="impressum.html" style="color:rgba(255,255,255,0.4)">Impressum</a>
+      <a href="datenschutz.html" style="color:rgba(255,255,255,0.4)">Datenschutz</a>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const S = {
   step: 1,
   score: 0,
@@ -548,7 +548,7 @@ const S = {
 const HEADERS = {
   0: ['Schritt 1 von 8', 'Kostenlose Energie-Analyse', 'Wähle dein Produkt – dauert nur 2 Minuten'],
   1: ['Schritt 2 von 8', 'Deine Immobilie', '100% kostenlos & unverbindlich'],
-  2: ['Schritt 3 von 8', 'Dach-Check', 'Kurze Einschätzung – wir prüfen den Rest'],
+  2: ['Schritt 3 von 8', 'Dach-Check (Solar)', 'Kurze Einschätzung – nur für Solaranlage'],
   3: ['Schritt 4 von 8', 'Dein Einsparpotenzial', 'So berechnen wir deine persönliche Ersparnis'],
   4: ['Schritt 5 von 8', 'Dein Zeitplan', 'Damit dein Partner richtig planen kann'],
   5: ['Schritt 6 von 8', 'Deine Kaufabsicht', 'Fast am Ziel – noch 2 Schritte'],
@@ -570,6 +570,15 @@ function showStep(n) {
   el.classList.add('active');
   S.step = n;
   const h = HEADERS[n] || HEADERS[7];
+  // Dynamic step 3 question based on product
+  if (n === 3) {
+    const isWP = S.answers.produkt === 'Wärmepumpe';
+    const isCombo = S.answers.produkt === 'Solar + Wärmepumpe';
+    const q = document.getElementById('step3question');
+    const s = document.getElementById('step3sub');
+    if (q) q.textContent = isWP ? 'Wie hoch sind deine monatlichen Heizkosten?' : isCombo ? 'Wie hoch sind deine monatlichen Energie­kosten?' : 'Wie hoch sind deine monatlichen Stromkosten?';
+    if (s) s.textContent = isWP ? 'Heizöl, Gas oder Fernwärme – Basis für deine Ersparnis mit Wärmepumpe' : isCombo ? 'Strom- und Heizkosten zusammen – für die Gesamtersparnis' : 'Der wichtigste Faktor für deine persönliche Ersparnis';
+  }
   document.getElementById('fStepLabel').textContent  = h[0];
   document.getElementById('fHeaderTitle').textContent = h[1];
   document.getElementById('fHeaderSub').textContent   = h[2];
@@ -602,8 +611,12 @@ function selectAndNext(btn, stepNum, key, value, pts) {
   S.answers[key] = value;
   addScore(pts);
   setTimeout(() => {
-    showStep(stepNum + 1);
-    if (stepNum + 1 === 7) refreshFinalScore();
+    // Skip Dach-Check (step 2) for Wärmepumpe-only
+    const isWPonly = S.answers.produkt === 'Wärmepumpe';
+    let next = stepNum + 1;
+    if (stepNum === 1 && isWPonly) next = 3; // skip dach
+    showStep(next);
+    if (next === 7) refreshFinalScore();
   }, 320);
 }
 
@@ -674,6 +687,7 @@ async function submitFunnel() {
   document.getElementById('successMsg').textContent = tier.msg;
   document.getElementById('fSuccess').style.display = 'block';
   document.getElementById('fHeaderTitle').textContent = 'Anfrage erfolgreich!';
+  document.getElementById('fHeaderSub').textContent = (lead.produkt || 'Solar') + ' – ein Partner meldet sich bald';
   document.getElementById('fHeaderSub').textContent   = 'Danke – ein Partner meldet sich bald';
   document.getElementById('fStepLabel').textContent   = 'Fertig ✓';
   document.querySelectorAll('.f-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
@@ -710,10 +724,4 @@ function disqualify() {
   document.getElementById('fTrust').style.display = 'none';
   document.querySelector('.f-progress').style.display = 'none';
   document.getElementById('fDisqualify').classList.add('active');
-  document.getElementById('fHeaderTitle').textContent = 'Leider nicht passend';
-  document.getElementById('fHeaderSub').textContent   = 'Wir können dir trotzdem helfen';
-}
-</script>
-<script>
-function toggleNav() {
-  document.getE
+  document.getEleme
