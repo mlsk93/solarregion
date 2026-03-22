@@ -7,217 +7,85 @@
   <meta name="description" content="Kostenlose Solar-Analyse – dauert nur 2 Minuten. 100% unverbindlich. Geprüfte Fachbetriebe aus deiner Region.">
   <link rel="stylesheet" href="style.css">
   <style>
-    body { background: #F2F5F2; }
-    .funnel-page { min-height: 100vh; display: flex; flex-direction: column; }
-
-    .funnel-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px 60px;
-      background:
-        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(255,92,0,0.08) 0%, transparent 60%),
-        #F2F5F2;
-    }
-
-    .funnel-box {
-      width: 100%;
-      max-width: 600px;
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 24px 72px rgba(0,0,0,0.11);
-      overflow: hidden;
-    }
-
-    /* Header */
-    .f-header {
-      background: linear-gradient(135deg, #0D2B1A 0%, #1A4A2E 100%);
-      padding: 28px 36px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .f-header::after {
-      content: '☀';
-      position: absolute; right: 24px; top: 50%;
-      transform: translateY(-50%);
-      font-size: 4rem; opacity: 0.1; line-height: 1;
-    }
-    .f-header-top {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
-    }
-    .f-step-indicator {
-      font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.55);
-      text-transform: uppercase; letter-spacing: 0.08em;
-    }
-    .f-score-badge {
-      background: rgba(255,92,0,0.2); border: 1px solid rgba(255,92,0,0.4);
-      color: #FF9147; padding: 4px 14px; border-radius: 50px;
-      font-size: 0.78rem; font-weight: 700;
-      display: flex; align-items: center; gap: 6px; transition: background .3s;
-    }
-    .f-header h2 { color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
-    .f-header p { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin: 0; }
-
-    /* Progress */
-    .f-progress { padding: 20px 36px 0; background: #fff; }
-    .f-prog-dots { display: flex; gap: 6px; margin-bottom: 10px; }
-    .f-dot { flex: 1; height: 4px; border-radius: 50px; background: #E4E9E4; transition: background .4s; }
-    .f-dot.done { background: var(--orange); }
-    .f-dot.active { background: var(--gold); }
-    .f-prog-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0; }
-
-    /* Steps */
-    .f-step { padding: 28px 36px 32px; display: none; animation: fadeUp .35s ease forwards; }
-    .f-step.active { display: block; }
-    .f-question { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; line-height: 1.3; }
-    .f-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 22px; }
-
-    /* Choices */
-    .f-choices { display: flex; flex-direction: column; gap: 10px; }
-    .f-choice {
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 18px; border: 2px solid #E4E9E4; border-radius: 14px;
-      background: #fff; cursor: pointer;
-      font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
-      color: var(--dark); text-align: left; transition: all .2s;
-    }
-    .f-choice:hover { border-color: #FFB380; background: rgba(255,92,0,0.03); }
-    .f-choice.selected { border-color: var(--orange); background: rgba(255,92,0,0.05); }
-    .f-choice.selected .f-check { opacity: 1; }
-    .f-choice.bad:hover { border-color: #ccc; background: #fafafa; }
-    .f-choice.bad.selected { border-color: #bbb; background: #f8f8f8; }
-    .f-choice-icon { font-size: 1.5rem; flex-shrink: 0; width: 36px; text-align: center; }
-    .f-choice-text { flex: 1; line-height: 1.3; }
-    .f-choice-text small { display: block; font-weight: 400; font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
-    .f-check {
-      width: 22px; height: 22px; background: var(--orange); border-radius: 50%;
-      display: grid; place-items: center; color: #fff; font-size: 0.7rem;
-      opacity: 0; transition: opacity .2s; flex-shrink: 0;
-    }
-
-    /* Tags */
-    .f-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-    .f-tag {
-      padding: 12px 20px; border: 2px solid #E4E9E4; border-radius: 50px;
-      font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
-      cursor: pointer; transition: all .2s; background: #fff;
-    }
-    .f-tag:hover { border-color: var(--orange); color: var(--orange); }
-    .f-tag.selected { border-color: var(--orange); background: rgba(255,92,0,0.07); color: var(--orange); }
-
+    body { background:#F2F5F2; }
+    .funnel-page { min-height:100vh; display:flex; flex-direction:column; }
+    .funnel-wrap { flex:1; display:flex; align-items:center; justify-content:center; padding:40px 20px 60px; background:radial-gradient(ellipse 70% 40% at 50% 0%,rgba(255,92,0,.08) 0%,transparent 60%),#F2F5F2; }
+    .funnel-box { width:100%; max-width:600px; background:#fff; border-radius:24px; box-shadow:0 24px 72px rgba(0,0,0,.11); overflow:hidden; }
+    .f-header { background:linear-gradient(135deg,#0D2B1A,#1A4A2E); padding:28px 36px 24px; position:relative; overflow:hidden; }
+    .f-header::after { content:'☀'; position:absolute; right:24px; top:50%; transform:translateY(-50%); font-size:4rem; opacity:.1; line-height:1; }
+    .f-header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .f-step-indicator { font-size:.78rem; font-weight:700; color:rgba(255,255,255,.55); text-transform:uppercase; letter-spacing:.08em; }
+    .f-score-badge { background:rgba(255,92,0,.2); border:1px solid rgba(255,92,0,.4); color:#FF9147; padding:4px 14px; border-radius:50px; font-size:.78rem; font-weight:700; }
+    .f-header h2 { color:#fff; font-size:1.15rem; font-weight:700; margin-bottom:6px; line-height:1.3; }
+    .f-header p { color:rgba(255,255,255,.6); font-size:.82rem; margin:0; }
+    .f-progress { padding:20px 36px 0; background:#fff; }
+    .f-prog-dots { display:flex; gap:6px; margin-bottom:10px; }
+    .f-dot { flex:1; height:4px; border-radius:50px; background:#E4E9E4; transition:background .4s; }
+    .f-dot.done { background:var(--orange); }
+    .f-dot.active { background:var(--gold,#FFB800); }
+    .f-step { padding:28px 36px 32px; display:none; }
+    .f-step.active { display:block; animation:fadeUp .35s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .f-question { font-family:'Bricolage Grotesque',sans-serif; font-size:1.25rem; font-weight:800; color:#0A100D; margin-bottom:6px; line-height:1.3; }
+    .f-sub { font-size:.82rem; color:#6B7A6B; margin-bottom:22px; }
+    /* Product cards */
+    .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+    .product-card { border:2px solid #E2E8E2; border-radius:16px; padding:24px 12px 18px; cursor:pointer; text-align:center; background:#fff; transition:all .22s; position:relative; }
+    .product-card:hover { border-color:#FFB380; }
+    .product-card.selected { border-color:var(--orange,#FF5200); background:rgba(255,82,0,.05); }
+    .product-card.selected::after { content:'✓'; position:absolute; top:8px; right:10px; width:20px; height:20px; background:var(--orange,#FF5200); color:#fff; border-radius:50%; font-size:.68rem; font-weight:800; display:grid; place-items:center; }
+    .product-icon { font-size:2rem; margin-bottom:10px; display:block; }
+    .product-name { font-size:.85rem; font-weight:700; color:#0A100D; line-height:1.3; }
+    .product-sub { font-size:.72rem; color:#6B7A6B; margin-top:4px; }
+    /* Choice buttons */
+    .f-choices { display:flex; flex-direction:column; gap:10px; }
+    .f-choice { display:flex; align-items:center; gap:14px; padding:16px 18px; border:2px solid #E2E8E2; border-radius:14px; background:#fff; cursor:pointer; font-family:'Instrument Sans','DM Sans',sans-serif; font-size:.95rem; font-weight:600; color:#0A100D; text-align:left; transition:all .2s; }
+    .f-choice:hover { border-color:#FFB380; }
+    .f-choice.selected { border-color:var(--orange,#FF5200); background:rgba(255,82,0,.05); }
+    .f-choice.selected .f-check { opacity:1; }
+    .f-choice-icon { font-size:1.5rem; flex-shrink:0; width:36px; text-align:center; }
+    .f-choice-text { flex:1; line-height:1.3; }
+    .f-choice-text small { display:block; font-weight:400; font-size:.78rem; color:#6B7A6B; margin-top:2px; }
+    .f-check { width:22px; height:22px; background:var(--orange,#FF5200); border-radius:50%; display:grid; place-items:center; color:#fff; font-size:.7rem; opacity:0; transition:opacity .2s; flex-shrink:0; }
     /* Form */
-    .f-form-group { margin-bottom: 16px; }
-    .f-label { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
-    .f-required { color: var(--orange); font-size: 0.7rem; font-weight: 600; }
-    .f-input {
-      width: 100%; padding: 14px 16px; border: 2px solid #E4E9E4; border-radius: 12px;
-      font-family: 'Instrument Sans', sans-serif; font-size: 0.95rem; color: var(--dark);
-      background: #fff; transition: border-color .2s, box-shadow .2s;
-    }
-    .f-input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,92,0,0.09); }
-    .f-input.error { border-color: #FF3D00; box-shadow: 0 0 0 3px rgba(255,61,0,0.12); }
-    .f-input-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
-
+    .f-form-group { margin-bottom:16px; }
+    .f-label { display:flex; align-items:center; gap:6px; font-size:.82rem; font-weight:700; color:#0A100D; margin-bottom:7px; }
+    .f-required { color:var(--orange,#FF5200); font-size:.7rem; }
+    .f-input { width:100%; padding:14px 16px; border:2px solid #E2E8E2; border-radius:12px; font-family:'Instrument Sans','DM Sans',sans-serif; font-size:.95rem; color:#0A100D; background:#fff; transition:border-color .2s; }
+    .f-input:focus { outline:none; border-color:var(--orange,#FF5200); box-shadow:0 0 0 3px rgba(255,82,0,.09); }
+    .f-input.error { border-color:#FF3D00; }
+    .f-input-hint { font-size:.75rem; color:#6B7A6B; margin-top:5px; }
+    /* Tags */
+    .f-tags { display:flex; flex-wrap:wrap; gap:10px; }
+    .f-tag { padding:12px 20px; border:2px solid #E2E8E2; border-radius:50px; font-family:'Instrument Sans','DM Sans',sans-serif; font-size:.88rem; font-weight:600; cursor:pointer; transition:all .2s; background:#fff; }
+    .f-tag:hover, .f-tag.selected { border-color:var(--orange,#FF5200); color:var(--orange,#FF5200); background:rgba(255,82,0,.07); }
     /* Nav */
-    .f-nav { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
-    .f-btn-next {
-      flex: 1; padding: 16px 24px; background: var(--orange); color: #fff;
-      border: none; border-radius: 50px;
-      font-family: 'Instrument Sans', sans-serif; font-size: 1rem; font-weight: 700;
-      cursor: pointer; transition: all .25s;
-      box-shadow: 0 4px 18px rgba(255,92,0,0.3);
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .f-btn-next:hover { background: var(--orange-light); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(255,92,0,0.4); }
-    .f-btn-back {
-      padding: 16px 22px; background: none; border: 2px solid #E4E9E4; border-radius: 50px;
-      font-family: 'Instrument Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
-      color: var(--text-muted); cursor: pointer; transition: all .2s;
-    }
-    .f-btn-back:hover { border-color: #aaa; color: var(--dark); }
-
+    .f-nav { display:flex; align-items:center; gap:12px; margin-top:24px; }
+    .f-btn-next { flex:1; padding:16px 24px; background:var(--orange,#FF5200); color:#fff; border:none; border-radius:50px; font-family:'Instrument Sans','DM Sans',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:all .25s; box-shadow:0 4px 18px rgba(255,82,0,.3); display:flex; align-items:center; justify-content:center; gap:8px; }
+    .f-btn-next:hover { background:#FF7A35; transform:translateY(-1px); }
+    .f-btn-back { padding:16px 22px; background:none; border:2px solid #E2E8E2; border-radius:50px; font-family:'Instrument Sans','DM Sans',sans-serif; font-size:.9rem; font-weight:600; color:#6B7A6B; cursor:pointer; transition:all .2s; }
+    .f-btn-back:hover { border-color:#aaa; color:#0A100D; }
+    /* Score */
+    .f-score-preview { background:rgba(255,82,0,.05); border-radius:14px; padding:18px 20px; border:1px solid rgba(255,82,0,.15); margin-top:28px; }
+    .f-score-preview-label { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--orange,#FF5200); margin-bottom:10px; }
+    .f-score-num { font-family:'Bricolage Grotesque',sans-serif; font-size:2rem; font-weight:800; color:#0A100D; }
     /* Disqualify */
-    .f-disqualify { padding: 48px 36px; text-align: center; display: none; }
-    .f-disqualify.active { display: block; }
-    .f-disqualify h3 { font-size: 1.4rem; margin-bottom: 12px; }
-    .f-disqualify p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; max-width: 400px; margin: 0 auto 20px; }
-
+    .f-disqualify { padding:48px 36px; text-align:center; display:none; }
+    .f-disqualify.active { display:block; }
     /* Success */
-    .f-success { padding: 48px 36px; text-align: center; display: none; }
-    .f-success.active { display: block; }
-    .f-score-result {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 10px 24px; border-radius: 50px;
-      font-weight: 700; font-size: 0.9rem; margin-bottom: 24px;
-    }
-    .score-premium { background: rgba(255,92,0,0.1); color: var(--orange); border: 2px solid rgba(255,92,0,0.3); }
-    .score-good { background: rgba(13,100,50,0.08); color: #1A6B38; border: 2px solid rgba(13,100,50,0.25); }
-    .score-mid { background: rgba(255,190,0,0.1); color: #8A6A00; border: 2px solid rgba(255,190,0,0.3); }
-    .f-success h2 { font-size: 1.7rem; margin-bottom: 12px; }
-    .f-success > p { color: var(--text-muted); max-width: 420px; margin: 0 auto 28px; font-size: 0.92rem; line-height: 1.7; }
-    .f-next-steps { background: #F4F7F4; border-radius: 16px; padding: 20px 24px; text-align: left; max-width: 400px; margin: 0 auto 28px; }
-    .f-next-step { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #E4E9E4; font-size: 0.88rem; align-items: flex-start; }
-    .f-next-step:last-child { border-bottom: none; }
-    .f-next-num { width: 24px; height: 24px; background: var(--orange); color: #fff; border-radius: 50%; display: grid; place-items: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
-
-    /* Score preview box in step 7 */
-    .f-score-preview {
-      background: rgba(255,92,0,0.05); border-radius: 14px;
-      padding: 18px 20px; border: 1px solid rgba(255,92,0,0.15); margin-top: 28px;
-    }
-    .f-score-preview-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--orange); margin-bottom: 10px; }
-    .f-score-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; font-weight: 800; color: var(--dark); }
-    .f-score-tier { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
-
-    /* Trust row */
-    .f-trust { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 16px 36px; background: #FAFBFA; border-top: 1px solid #ECEEEC; font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
-    .f-trust span { display: flex; align-items: center; gap: 5px; }
-
-    .f-disclaimer { font-size: 0.72rem; color: #AAB5AA; text-align: center; margin-top: 18px; line-height: 1.55; }
-    .f-disclaimer a { color: var(--orange); }
-
+    .f-success { padding:48px 36px; text-align:center; display:none; }
+    .f-success.active { display:block; }
+    .f-score-result { display:inline-flex; align-items:center; gap:10px; padding:10px 24px; border-radius:50px; font-weight:700; font-size:.9rem; margin-bottom:24px; background:rgba(255,82,0,.1); color:var(--orange,#FF5200); border:2px solid rgba(255,82,0,.3); }
+    .f-next-steps { background:#F4F7F4; border-radius:16px; padding:20px 24px; text-align:left; max-width:400px; margin:0 auto 28px; }
+    .f-next-step { display:flex; gap:14px; padding:10px 0; border-bottom:1px solid #E2E8E2; font-size:.88rem; align-items:flex-start; }
+    .f-next-step:last-child { border-bottom:none; }
+    .f-next-num { width:24px; height:24px; background:var(--orange,#FF5200); color:#fff; border-radius:50%; display:grid; place-items:center; font-size:.75rem; font-weight:700; flex-shrink:0; }
+    .f-trust { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; padding:16px 36px; background:#FAFBFA; font-size:.75rem; color:#6B7A6B; font-weight:600; border-top:1px solid #ECEEEC; }
+    .f-disclaimer { font-size:.72rem; color:#AAB5AA; text-align:center; margin-top:18px; line-height:1.55; }
+    .f-disclaimer a { color:var(--orange,#FF5200); }
     @keyframes scorePulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
-    .score-pulse { animation: scorePulse .4s ease; }
-
-    @media (max-width: 520px) {
-      .f-step, .f-header { padding-left: 20px; padding-right: 20px; }
-      .f-progress, .f-trust { padding-left: 20px; padding-right: 20px; }
-      .f-success, .f-disqualify { padding: 36px 20px; }
-    }
-  
-    /* Product selection cards */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .product-card {
-      border: 2px solid var(--border);
-      border-radius: 16px;
-      padding: 24px 16px 18px;
-      cursor: pointer;
-      text-align: center;
-      background: #fff;
-      transition: all .22s;
-      position: relative;
-    }
-    .product-card:hover { border-color: #FFB380; background: rgba(255,92,0,0.02); }
-    .product-card.selected { border-color: var(--orange); background: rgba(255,92,0,0.05); }
-    .product-card.selected::after {
-      content: "✓";
-      position: absolute; top: 10px; right: 12px;
-      width: 20px; height: 20px;
-      background: var(--orange); color: #fff;
-      border-radius: 50%; font-size: 0.68rem; font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .product-icon { font-size: 2.4rem; margin-bottom: 10px; display: block; }
-    .product-name { font-size: 0.85rem; font-weight: 700; color: var(--dark); line-height: 1.3; }
-    .product-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
-    @media(max-width:400px){ .product-grid { grid-template-columns: 1fr; } }
-
+    .score-pulse { animation:scorePulse .4s ease; }
+    @media(max-width:520px){ .f-step,.f-header{padding-left:20px;padding-right:20px} .f-progress{padding-left:20px;padding-right:20px} .product-grid{grid-template-columns:1fr} .f-trust{padding:14px 20px} .f-success,.f-disqualify{padding:36px 20px} }
   </style>
 </head>
 <body class="funnel-page">
@@ -226,7 +94,7 @@
   <a href="index.html" class="nav-logo">&#9728; Green<span>Horizon</span></a>
   <ul class="nav-links" id="navLinks">
     <li class="nav-dropdown">
-      <a href="#" class="nav-drop-toggle">Regionen ▾</a>
+      <a href="#" class="nav-drop-toggle">Regionen &#9662;</a>
       <ul class="nav-dropdown-menu">
         <li><a href="solaranlage-detmold.html">Detmold</a></li>
         <li><a href="solaranlage-lemgo.html">Lemgo</a></li>
@@ -235,521 +103,463 @@
         <li><a href="solaranlage-paderborn.html">Paderborn</a></li>
         <li><a href="solaranlage-herford.html">Herford</a></li>
         <li><a href="solaranlage-minden.html">Minden</a></li>
-        <li><a href="solaranlage-guetersloh.html">Gütersloh</a></li>
+        <li><a href="solaranlage-guetersloh.html">Guetersloh</a></li>
         <li><a href="solaranlage-blomberg.html">Blomberg</a></li>
       </ul>
     </li>
     <li><a href="ratgeber-lohnt-sich-solar.html">Ratgeber</a></li>
-    <li><a href="ueber-uns.html">Über uns</a></li>
+    <li><a href="ueber-uns.html">Ueber uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
-    <li><a href="solar-check.html" class="nav-cta">Jetzt prüfen →</a></li>
+    <li><a href="solar-check.html" class="nav-cta">Jetzt pruefen &#8594;</a></li>
   </ul>
-  <div class="nav-burger" onclick="toggleNav()" aria-label="Menü">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="nav-burger" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>
 
-<div style="background:var(--green);color:rgba(255,255,255,0.85);text-align:center;padding:9px;font-size:0.78rem;font-weight:500">
-  🔒 Kostenlos & unverbindlich &nbsp;·&nbsp; ✓ Geprüfte Fachbetriebe &nbsp;·&nbsp; 📞 <a href="tel:+4915150490420" style="color:rgba(255,255,255,0.85);text-decoration:none">015150490420</a>
+<div style="background:var(--green,#0D2B1A);color:rgba(255,255,255,.85);text-align:center;padding:9px;font-size:.78rem;font-weight:500">
+  &#128274; Kostenlos &amp; unverbindlich &nbsp;&middot;&nbsp; &#10003; Geprufte Fachbetriebe &nbsp;&middot;&nbsp; &#128222; <a href="tel:+4915150490420" style="color:rgba(255,255,255,.9);text-decoration:none">015150490420</a>
 </div>
 
 <div class="funnel-wrap">
-  <div class="funnel-box" id="funnelBox">
+<div class="funnel-box" id="funnelBox">
 
-    <!-- HEADER -->
-    <div class="f-header">
-      <div class="f-header-top">
-        <span class="f-step-indicator" id="fStepLabel">Schritt 1 von 7</span>
-        <span class="f-score-badge" id="fScoreBadge">⭐ Score: 0 Pkt.</span>
-      </div>
-      <h2 id="fHeaderTitle">Kostenlose Solar-Analyse</h2>
-      <p id="fHeaderSub">Dauert nur 2 Minuten – 100% unverbindlich</p>
+  <!-- HEADER -->
+  <div class="f-header">
+    <div class="f-header-top">
+      <span class="f-step-indicator" id="fStepLabel">Schritt 1 von 8</span>
+      <span class="f-score-badge" id="fScoreBadge">&#11088; Score: 0 Pkt.</span>
     </div>
+    <h2 id="fHeaderTitle">Kostenlose Energie-Analyse</h2>
+    <p id="fHeaderSub">Waehle dein Produkt – dauert nur 2 Minuten</p>
+  </div>
 
-    <!-- PROGRESS -->
-    <div class="f-progress">
-      <div class="f-prog-dots">
-        <div class="f-dot active"></div><div class="f-dot"></div><div class="f-dot"></div>
-        <div class="f-dot"></div><div class="f-dot"></div><div class="f-dot"></div>
-        <div class="f-dot"></div><div class="f-dot"></div>
-      </div>
-      <p class="f-prog-label" id="fProgLabel">Geprüfte Partner aus deiner Region warten</p>
+  <!-- PROGRESS -->
+  <div class="f-progress">
+    <div class="f-prog-dots">
+      <div class="f-dot active" id="dot0"></div>
+      <div class="f-dot" id="dot1"></div>
+      <div class="f-dot" id="dot2"></div>
+      <div class="f-dot" id="dot3"></div>
+      <div class="f-dot" id="dot4"></div>
+      <div class="f-dot" id="dot5"></div>
+      <div class="f-dot" id="dot6"></div>
+      <div class="f-dot" id="dot7"></div>
     </div>
+  </div>
 
-    <!-- ── STEP 1 ── -->
-        <!-- ── STEP 0: Produkt-Auswahl ── -->
-    <div class="f-step active" id="fStep0">
-      <p class="f-question">Was möchtest du berechnen?</p>
-      <p class="f-sub">Wähle dein Wunschprodukt – wir finden den passenden Fachbetrieb</p>
-
-      <div class="product-grid">
-        <button class="product-card" data-product="Solar-Waermepumpe" data-pts="70" onclick="handleProduct(this)">
-          <span class="product-icon">&#127968;<br><small style="font-size:0.6em">&#9728;+&#127777;</small></span>
-          <div class="product-name">Solaranlage +<br>W&auml;rmepumpe</div>
-          <div class="product-sub">Maximale Ersparnis</div>
-        </button>
-        <button class="product-card" data-product="Solaranlage" data-pts="0" onclick="handleProduct(this)">
-          <span class="product-icon">&#9728;</span>
-          <div class="product-name">Solaranlage</div>
-          <div class="product-sub">Strom selbst erzeugen</div>
-        </button>
-        <button class="product-card" data-product="Waermepumpe" data-pts="0" onclick="handleProduct(this)">
-          <span class="product-icon">&#127777;</span>
-          <div class="product-name">W&auml;rmepumpe</div>
-          <div class="product-sub">Heizen mit Umw&auml;ltw&auml;rme</div>
-        </button>
-      </div>
-          <div class="product-sub">Maximale Ersparnis</div>
-        </button>
-        <button class="product-card" onclick="selectProduct(this,'Solaranlage',0)">
-          <span class="product-icon">☀</span>
-          <div class="product-name">Solaranlage</div>
-          <div class="product-sub">Strom selbst erzeugen</div>
-        </button>
-        <button class="product-card" onclick="selectProduct(this,'Wärmepumpe',0)">
-          <span class="product-icon">🌡</span>
-          <div class="product-name">Wärmepumpe</div>
-          <div class="product-sub">Heizen mit Umweltwärme</div>
-        </button>
-      </div>
-      <p class="f-disclaimer">Alle Produkte: kostenlos, unverbindlich, geprüfte Fachbetriebe</p>
+  <!-- STEP 0: Produkt -->
+  <div class="f-step active" id="fStep0">
+    <p class="f-question">Was moechtest du berechnen?</p>
+    <p class="f-sub">Waehle dein Wunschprodukt – wir finden den passenden Fachbetrieb</p>
+    <div class="product-grid">
+      <button class="product-card" id="prod0" onclick="pickProduct(0,'Solar + Waermepumpe',70)">
+        <span class="product-icon">&#127968;&#9728;</span>
+        <div class="product-name">Solar +<br>Waermepumpe</div>
+        <div class="product-sub">Maximale Ersparnis</div>
+      </button>
+      <button class="product-card" id="prod1" onclick="pickProduct(1,'Solaranlage',0)">
+        <span class="product-icon">&#9728;</span>
+        <div class="product-name">Solaranlage</div>
+        <div class="product-sub">Strom selbst erzeugen</div>
+      </button>
+      <button class="product-card" id="prod2" onclick="pickProduct(2,'Waermepumpe',0)">
+        <span class="product-icon">&#127777;</span>
+        <div class="product-name">Waermepumpe</div>
+        <div class="product-sub">Heizen mit Umweltwaerme</div>
+      </button>
     </div>
+    <p class="f-disclaimer">Alle Produkte: kostenlos, unverbindlich, geprufte Fachbetriebe</p>
+  </div>
 
-    <!-- ── STEP 1: Eigenheim ── -->
-<div class="f-step" id="fStep1">
-      <p class="f-question">Besitzt du eine Immobilie?</p>
-      <p class="f-sub">Kostenlose Analyse – dauert nur 2 Minuten</p>
-      <div class="f-choices">
-        <button class="f-choice" onclick="selectAndNext(this,1,'eigenheim','Eigenheim',30)">
-          <span class="f-choice-icon">🏠</span>
-          <span class="f-choice-text">Ja, Eigenheim<small>Haus oder Wohnung im Eigentum</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice bad" onclick="disqualify()">
-          <span class="f-choice-icon">🏢</span>
-          <span class="f-choice-text">Nein, ich bin Mieter<small>Keine eigene Immobilie</small></span>
-          <span class="f-check">✓</span>
-        </button>
-      </div>
+  <!-- STEP 1: Eigenheim -->
+  <div class="f-step" id="fStep1">
+    <p class="f-question">Besitzt du eine Immobilie?</p>
+    <p class="f-sub">Kostenlose Analyse – dauert nur 2 Minuten</p>
+    <div class="f-choices">
+      <button class="f-choice" onclick="pick(this,1,'eigenheim','Eigenheim',30)">
+        <span class="f-choice-icon">&#127968;</span>
+        <span class="f-choice-text">Ja, Eigenheim<small>Haus oder Wohnung im Eigentum</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="disqualify()">
+        <span class="f-choice-icon">&#127962;</span>
+        <span class="f-choice-text">Nein, ich bin Mieter<small>Keine eigene Immobilie</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
     </div>
+    <div class="f-nav"><button class="f-btn-back" onclick="goTo(0)">&#8592; Zurueck</button></div>
+  </div>
 
-    <!-- ── STEP 2 ── -->
-    <div class="f-step" id="fStep2">
-      <p class="f-question">Ist dein Dach geeignet für Solar?</p>
-      <p class="f-sub">Die Ausrichtung bestimmt den Ertrag – wir prüfen den Rest kostenlos</p>
-      <div class="f-choices">
-        <button class="f-choice" onclick="selectAndNext(this,2,'dach','Süd/Flach',20)">
-          <span class="f-choice-icon">🌞</span>
-          <span class="f-choice-text">Ja – Süddach oder Flachdach<small>Optimale Ausrichtung für Solar</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice" onclick="selectAndNext(this,2,'dach','Unbekannt',10)">
-          <span class="f-choice-icon">🤔</span>
-          <span class="f-choice-text">Weiß nicht<small>Wir prüfen das kostenlos für dich</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice bad" onclick="selectAndNext(this,2,'dach','Nicht geeignet',0)">
-          <span class="f-choice-icon">🏚</span>
-          <span class="f-choice-text">Eher nicht / Norddach<small>Fragen lohnt sich trotzdem!</small></span>
-          <span class="f-check">✓</span>
-        </button>
-      </div>
-      <div class="f-nav"><button class="f-btn-back" onclick="showStep(1)">← Zurück</button></div>
+  <!-- STEP 2: Dach (nur Solar) -->
+  <div class="f-step" id="fStep2">
+    <p class="f-question">Ist dein Dach geeignet fuer Solar?</p>
+    <p class="f-sub">Kurze Einschaetzung – wir pruefen den Rest kostenlos</p>
+    <div class="f-choices">
+      <button class="f-choice" onclick="pick(this,2,'dach','Sued/Flach',20)">
+        <span class="f-choice-icon">&#127774;</span>
+        <span class="f-choice-text">Ja – Sueddach oder Flachdach<small>Optimale Ausrichtung fuer Solar</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,2,'dach','Unbekannt',10)">
+        <span class="f-choice-icon">&#129300;</span>
+        <span class="f-choice-text">Weiss nicht<small>Wir pruefen das kostenlos fuer dich</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,2,'dach','Nicht geeignet',0)">
+        <span class="f-choice-icon">&#127866;</span>
+        <span class="f-choice-text">Eher nicht / Norddach<small>Fragen lohnt sich trotzdem!</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
     </div>
+    <div class="f-nav"><button class="f-btn-back" onclick="goTo(1)">&#8592; Zurueck</button></div>
+  </div>
 
-    <!-- ── STEP 3 ── -->
-    <div class="f-step" id="fStep3">
-      <p class="f-question" id="step3question">Wie hoch sind deine monatlichen Energiekosten?</p>
-      <p class="f-sub" id="step3sub">Strom- und Heizkosten zusammen – Basis für deine Ersparnis</p>
-      <div class="f-choices">
-        <button class="f-choice" onclick="selectAndNext(this,3,'strom','unter 100 €',0)">
-          <span class="f-choice-icon">💡</span>
-          <span class="f-choice-text">unter 100 € / Monat<small>1–2 Personen Haushalt</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice" onclick="selectAndNext(this,3,'strom','100–200 €',10)">
-          <span class="f-choice-icon">⚡</span>
-          <span class="f-choice-text">100 – 200 € / Monat<small>Durchschnittlicher Haushalt</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice" onclick="selectAndNext(this,3,'strom','200–300 €',30)">
-          <span class="f-choice-icon">🔥</span>
-          <span class="f-choice-text">200 – 300 € / Monat<small>Hohes Einsparpotenzial!</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice" onclick="selectAndNext(this,3,'strom','300 €+',30)">
-          <span class="f-choice-icon">🚀</span>
-          <span class="f-choice-text">300 € + / Monat<small>Maximale Ersparnis möglich</small></span>
-          <span class="f-check">✓</span>
-        </button>
-      </div>
-      <div class="f-nav"><button class="f-btn-back" onclick="showStep(S.answers.produkt==='Wärmepumpe' ? 1 : 2)">← Zurück</button></div>
+  <!-- STEP 3: Kosten -->
+  <div class="f-step" id="fStep3">
+    <p class="f-question" id="q3">Wie hoch sind deine monatlichen Stromkosten?</p>
+    <p class="f-sub" id="s3">Der wichtigste Faktor fuer deine persoenliche Ersparnis</p>
+    <div class="f-choices">
+      <button class="f-choice" onclick="pick(this,3,'kosten','unter 100',0)">
+        <span class="f-choice-icon">&#128161;</span>
+        <span class="f-choice-text">unter 100 &#8364; / Monat<small>1–2 Personen Haushalt</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,3,'kosten','100-200',10)">
+        <span class="f-choice-icon">&#9889;</span>
+        <span class="f-choice-text">100 – 200 &#8364; / Monat<small>Durchschnittlicher Haushalt</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,3,'kosten','200-300',30)">
+        <span class="f-choice-icon">&#128293;</span>
+        <span class="f-choice-text">200 – 300 &#8364; / Monat<small>Hohes Einsparpotenzial!</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,3,'kosten','300+',30)">
+        <span class="f-choice-icon">&#128640;</span>
+        <span class="f-choice-text">300 &#8364;+ / Monat<small>Maximale Ersparnis moeglich</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
     </div>
+    <div class="f-nav"><button class="f-btn-back" id="back3" onclick="goBackFrom3()">&#8592; Zurueck</button></div>
+  </div>
 
-    <!-- ── STEP 4 ── -->
-    <div class="f-step" id="fStep4">
-      <p class="f-question">Wann möchtest du deine Solaranlage umsetzen?</p>
-      <p class="f-sub">Damit dein Partner das passende Angebot vorbereiten kann</p>
-      <div class="f-choices">
-        <button class="f-choice" onclick="selectAndNext(this,4,'zeitrahmen','Sofort',40)">
-          <span class="f-choice-icon">🔥</span>
-          <span class="f-choice-text">Sofort / innerhalb 1–3 Monate<small>Ich möchte schnell loslegen</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice" onclick="selectAndNext(this,4,'zeitrahmen','3–6 Monate',20)">
-          <span class="f-choice-icon">📅</span>
-          <span class="f-choice-text">3 – 6 Monate<small>Ich plane konkret, brauche noch etwas Zeit</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice bad" onclick="selectAndNext(this,4,'zeitrahmen','Später',0)">
-          <span class="f-choice-icon">🕐</span>
-          <span class="f-choice-text">Später / noch unsicher<small>Ich informiere mich zunächst</small></span>
-          <span class="f-check">✓</span>
-        </button>
-      </div>
-      <div class="f-nav"><button class="f-btn-back" onclick="showStep(3)">← Zurück</button></div>
+  <!-- STEP 4: Zeitrahmen -->
+  <div class="f-step" id="fStep4">
+    <p class="f-question">Wann moechtest du umsetzen?</p>
+    <p class="f-sub">Damit dein Partner das passende Angebot vorbereiten kann</p>
+    <div class="f-choices">
+      <button class="f-choice" onclick="pick(this,4,'zeitrahmen','Sofort',40)">
+        <span class="f-choice-icon">&#128293;</span>
+        <span class="f-choice-text">Sofort / 1–3 Monate<small>Ich moechte schnell loslegen</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,4,'zeitrahmen','3-6 Monate',20)">
+        <span class="f-choice-icon">&#128197;</span>
+        <span class="f-choice-text">3 – 6 Monate<small>Ich plane konkret</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,4,'zeitrahmen','Spaeter',0)">
+        <span class="f-choice-icon">&#128336;</span>
+        <span class="f-choice-text">Spaeter / unsicher<small>Ich informiere mich zunaechst</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
     </div>
+    <div class="f-nav"><button class="f-btn-back" onclick="goTo(3)">&#8592; Zurueck</button></div>
+  </div>
 
-    <!-- ── STEP 5 ── -->
-    <div class="f-step" id="fStep5">
-      <p class="f-question">Möchtest du ein konkretes Angebot erhalten?</p>
-      <p class="f-sub">100% kostenlos und unverbindlich – du entscheidest danach frei</p>
-      <div class="f-choices">
-        <button class="f-choice" onclick="selectAndNext(this,5,'intention','Ja – Angebot',50)">
-          <span class="f-choice-icon">✅</span>
-          <span class="f-choice-text">Ja, ich möchte ein konkretes Angebot<small>Von geprüften Fachbetrieben aus meiner Region</small></span>
-          <span class="f-check">✓</span>
-        </button>
-        <button class="f-choice bad" onclick="selectAndNext(this,5,'intention','Nur Info',0)">
-          <span class="f-choice-icon">📖</span>
-          <span class="f-choice-text">Ich möchte mich nur informieren<small>Kein Angebot nötig</small></span>
-          <span class="f-check">✓</span>
-        </button>
-      </div>
-      <div class="f-nav"><button class="f-btn-back" onclick="showStep(4)">← Zurück</button></div>
+  <!-- STEP 5: Kaufabsicht -->
+  <div class="f-step" id="fStep5">
+    <p class="f-question">Moechtest du ein konkretes Angebot?</p>
+    <p class="f-sub">100% kostenlos und unverbindlich – du entscheidest danach frei</p>
+    <div class="f-choices">
+      <button class="f-choice" onclick="pick(this,5,'intention','Ja',50)">
+        <span class="f-choice-icon">&#9989;</span>
+        <span class="f-choice-text">Ja, ich moechte ein Angebot<small>Von geprueften Fachbetrieben aus meiner Region</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
+      <button class="f-choice" onclick="pick(this,5,'intention','Nur Info',0)">
+        <span class="f-choice-icon">&#128214;</span>
+        <span class="f-choice-text">Nur informieren<small>Kein Angebot noetig</small></span>
+        <span class="f-check">&#10003;</span>
+      </button>
     </div>
+    <div class="f-nav"><button class="f-btn-back" onclick="goTo(4)">&#8592; Zurueck</button></div>
+  </div>
 
-    <!-- ── STEP 6: Kontakt ── -->
-    <div class="f-step" id="fStep6">
-      <p class="f-question">Wie können wir dich erreichen?</p>
-      <p class="f-sub">Ein regionaler Fachbetrieb meldet sich persönlich bei dir</p>
-
-      <div class="f-form-group">
-        <label class="f-label">Dein Name <span class="f-required">Pflichtfeld</span></label>
-        <input type="text" class="f-input" id="fName" placeholder="Vorname Nachname" autocomplete="name">
-      </div>
-      <div class="f-form-group">
-        <label class="f-label">Telefonnummer <span class="f-required">Pflichtfeld</span></label>
-        <input type="tel" class="f-input" id="fTel" placeholder="+49 176 12345678" autocomplete="tel">
-        <p class="f-input-hint">📞 Nur für Rückruf durch regionalen Fachbetrieb verwendet</p>
-      </div>
-      <div class="f-form-group">
-        <label class="f-label">E-Mail <span style="color:#AAB5AA;font-size:0.7rem">(optional)</span></label>
-        <input type="email" class="f-input" id="fEmail" placeholder="deine@email.de" autocomplete="email">
-      </div>
-      <div class="f-form-group">
-        <label class="f-label">Postleitzahl <span class="f-required">Pflichtfeld</span></label>
-        <input type="text" class="f-input" id="fPlz" placeholder="z.B. 32756" maxlength="5">
-        <p class="f-input-hint">📍 Für die Partnersuche in deiner Region</p>
-      </div>
-
-      <div class="f-nav">
-        <button class="f-btn-back" onclick="showStep(5)">← Zurück</button>
-        <button class="f-btn-next" onclick="nextFromStep6()">🔒 Weiter – fast fertig! →</button>
-      </div>
-      <p class="f-disclaimer">
-        Deine Daten werden nur an geprüfte Fachbetriebe weitergegeben.
-        Kein Spam, keine Drittparteien. <a href="index.html">Datenschutz</a>
-      </p>
+  <!-- STEP 6: Kontakt -->
+  <div class="f-step" id="fStep6">
+    <p class="f-question">Wie koennen wir dich erreichen?</p>
+    <p class="f-sub">Ein regionaler Fachbetrieb meldet sich persoenlich bei dir</p>
+    <div class="f-form-group">
+      <label class="f-label">Name <span class="f-required">Pflichtfeld</span></label>
+      <input type="text" class="f-input" id="fName" placeholder="Vor- und Nachname">
     </div>
-
-    <!-- ── STEP 7: Erreichbarkeit ── -->
-    <div class="f-step" id="fStep7">
-      <p class="f-question">Wann bist du am besten erreichbar?</p>
-      <p class="f-sub">Damit dein Partner zum richtigen Zeitpunkt anruft</p>
-
-      <div class="f-tags">
-        <button class="f-tag" onclick="toggleTag(this)">🌅 Vormittag (8–12 Uhr)</button>
-        <button class="f-tag" onclick="toggleTag(this)">🌤 Nachmittag (12–17 Uhr)</button>
-        <button class="f-tag" onclick="toggleTag(this)">🌆 Abend (17–20 Uhr)</button>
-        <button class="f-tag" onclick="toggleTag(this)">📅 Wochenende</button>
-      </div>
-
-      <div class="f-score-preview">
-        <div class="f-score-preview-label">⭐ Deine Lead-Bewertung</div>
-        <div class="f-score-num" id="finalScoreNum">0 Punkte</div>
-        <div class="f-score-tier" id="finalScoreTier">Wird berechnet…</div>
-      </div>
-
-      <div class="f-nav" style="margin-top:20px">
-        <button class="f-btn-back" onclick="showStep(6)">← Zurück</button>
-        <button class="f-btn-next" onclick="submitFunnel()">☀ Angebot anfordern</button>
-      </div>
-      <p class="f-disclaimer">🔒 SSL-verschlüsselt · DSGVO-konform · Keine Verkäufer, nur Fachbetriebe</p>
+    <div class="f-form-group">
+      <label class="f-label">Telefon <span class="f-required">Pflichtfeld</span></label>
+      <input type="tel" class="f-input" id="fTel" placeholder="+49 176 12345678">
+      <p class="f-input-hint">&#128222; Nur fuer Rueckruf durch regionalen Fachbetrieb</p>
     </div>
-
-    <!-- DISQUALIFY -->
-    <div class="f-disqualify" id="fDisqualify">
-      <div style="font-size:3.5rem;margin-bottom:20px">🪟</div>
-      <h3>Auch als Mieter gibt es eine Option!</h3>
-      <p style="color:var(--text-muted);max-width:380px;margin:0 auto 16px;font-size:0.92rem;line-height:1.7">
-        Ein <strong>Balkonkraftwerk</strong> ist auch für Mieter möglich – einfach anstecken, sofort sparen. Kein Dach nötig, ab ~300 €.
-      </p>
-      <div style="background:rgba(255,92,0,0.06);border-radius:12px;padding:16px 20px;max-width:360px;margin:0 auto 24px;text-align:left">
-        <div style="font-size:0.78rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">💡 Balkonkraftwerk – das lohnt sich:</div>
-        <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">
-          ✓ Keine Genehmigung nötig (bis 800W)<br>
-          ✓ Installation in 30 Minuten<br>
-          ✓ 100–300 € Ersparnis pro Jahr<br>
-          ✓ Mitnehmen beim Umzug
-        </div>
-      </div>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="ratgeber-lohnt-sich-solar.html" class="btn btn-secondary btn-sm">📖 Solar-Ratgeber lesen</a>
-        <a href="index.html" class="btn btn-primary btn-sm">Zur Startseite</a>
-      </div>
+    <div class="f-form-group">
+      <label class="f-label">E-Mail <span style="color:#AAB5AA;font-size:.7rem">(optional)</span></label>
+      <input type="email" class="f-input" id="fEmail" placeholder="deine@email.de">
     </div>
-
-    <!-- SUCCESS -->
-    <div class="f-success" id="fSuccess">
-      <div style="font-size:3.5rem;margin-bottom:16px">🎉</div>
-      <div class="f-score-result" id="scoreResultBadge">⭐ Anfrage eingegangen</div>
-      <h2>Deine Anfrage ist eingegangen!</h2>
-      <p id="successMsg">Ein geprüfter Fachbetrieb aus deiner Region meldet sich bei dir.</p>
-      <div class="f-next-steps">
-        <div class="f-next-step"><div class="f-next-num">1</div><div>Anfrage wird geprüft und vorbereitet</div></div>
-        <div class="f-next-step"><div class="f-next-num">2</div><div>Passender Fachbetrieb wird benachrichtigt</div></div>
-        <div class="f-next-step"><div class="f-next-num">3</div><div>Rückruf zum gewünschten Zeitpunkt</div></div>
-        <div class="f-next-step"><div class="f-next-num">4</div><div>Kostenloses Angebot – 100% unverbindlich</div></div>
-      </div>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="ratgeber-lohnt-sich-solar.html" class="btn btn-secondary btn-sm">Ratgeber lesen</a>
-        <a href="index.html" class="btn btn-primary btn-sm">Zur Startseite</a>
-      </div>
+    <div class="f-form-group">
+      <label class="f-label">Postleitzahl <span class="f-required">Pflichtfeld</span></label>
+      <input type="text" class="f-input" id="fPlz" placeholder="z.B. 32756" maxlength="5">
     </div>
-
-    <!-- TRUST ROW -->
-    <div class="f-trust" id="fTrust">
-      <span>🔒 SSL-sicher</span>
-      <span>✓ DSGVO-konform</span>
-      <span>⭐ 4,8 / 5 Bewertung</span>
-      <span>📍 Regionale Partner</span>
+    <div class="f-nav">
+      <button class="f-btn-back" onclick="goTo(5)">&#8592; Zurueck</button>
+      <button class="f-btn-next" onclick="submitStep6()">&#128274; Weiter – fast fertig! &#8594;</button>
     </div>
+    <p class="f-disclaimer">Deine Daten gehen nur an geprufte Fachbetriebe. <a href="datenschutz.html">Datenschutz</a></p>
+  </div>
 
+  <!-- STEP 7: Erreichbarkeit -->
+  <div class="f-step" id="fStep7">
+    <p class="f-question">Wann bist du am besten erreichbar?</p>
+    <p class="f-sub">Damit dein Partner zum richtigen Zeitpunkt anruft</p>
+    <div class="f-tags">
+      <button class="f-tag" onclick="this.classList.toggle('selected')">&#127749; Vormittag (8–12)</button>
+      <button class="f-tag" onclick="this.classList.toggle('selected')">&#127780; Nachmittag (12–17)</button>
+      <button class="f-tag" onclick="this.classList.toggle('selected')">&#127750; Abend (17–20)</button>
+      <button class="f-tag" onclick="this.classList.toggle('selected')">&#128197; Wochenende</button>
+    </div>
+    <div class="f-score-preview">
+      <div class="f-score-preview-label">&#11088; Deine Lead-Bewertung</div>
+      <div class="f-score-num" id="finalScore">0 Punkte</div>
+    </div>
+    <div class="f-nav" style="margin-top:20px">
+      <button class="f-btn-back" onclick="goTo(6)">&#8592; Zurueck</button>
+      <button class="f-btn-next" onclick="submitFunnel()">&#9728; Angebot anfordern</button>
+    </div>
+    <p class="f-disclaimer">&#128274; SSL-verschluesselt &middot; DSGVO-konform &middot; Keine Verkaeufer, nur Fachbetriebe</p>
+  </div>
+
+  <!-- DISQUALIFY -->
+  <div class="f-disqualify" id="fDisq">
+    <div style="font-size:3rem;margin-bottom:16px">&#129327;</div>
+    <h3>Auch als Mieter gibt es eine Option!</h3>
+    <p style="color:#6B7A6B;font-size:.9rem;line-height:1.7;max-width:380px;margin:0 auto 20px">Ein <strong>Balkonkraftwerk</strong> ist auch fuer Mieter moeglich – ab ca. 300 &#8364;, keine Genehmigung bis 800W.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="ratgeber-lohnt-sich-solar.html" class="btn btn-secondary btn-sm">Ratgeber lesen</a>
+      <a href="index.html" class="btn btn-primary btn-sm">Startseite</a>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="f-success" id="fSuccess">
+    <div style="font-size:3rem;margin-bottom:16px">&#127881;</div>
+    <div class="f-score-result" id="fScoreResult">&#11088; Anfrage eingegangen</div>
+    <h2>Deine Anfrage ist eingegangen!</h2>
+    <p style="color:#6B7A6B;max-width:400px;margin:0 auto 24px;font-size:.92rem;line-height:1.7" id="fSuccessMsg">Ein gepruefter Fachbetrieb aus deiner Region meldet sich bald.</p>
+    <div class="f-next-steps">
+      <div class="f-next-step"><div class="f-next-num">1</div><div>Anfrage wird geprueft</div></div>
+      <div class="f-next-step"><div class="f-next-num">2</div><div>Passender Fachbetrieb wird benachrichtigt</div></div>
+      <div class="f-next-step"><div class="f-next-num">3</div><div>Rueckruf zum gewuenschten Zeitpunkt</div></div>
+      <div class="f-next-step"><div class="f-next-num">4</div><div>Kostenloses Angebot – 100% unverbindlich</div></div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="ratgeber-lohnt-sich-solar.html" class="btn btn-secondary btn-sm">Ratgeber lesen</a>
+      <a href="index.html" class="btn btn-primary btn-sm">Zur Startseite</a>
+    </div>
+  </div>
+
+  <div class="f-trust" id="fTrust">
+    <span>&#128274; SSL-sicher</span>
+    <span>&#10003; DSGVO-konform</span>
+    <span>&#11088; 4,8/5 Bewertung</span>
+    <span>&#128205; Regionale Partner</span>
   </div>
 </div>
+</div>
 
-<div style="background:#F4F7F4;border-top:1px solid #E2E8E2;padding:14px;text-align:center;font-size:0.78rem;color:#6B7A6B">Antonio Schmidt · GreenHorizon Energy · Amselweg 29, 32657 Lemgo · <a href="tel:+4915150490420" style="color:var(--orange)">015150490420</a> · <a href="/cdn-cgi/l/email-protection#bed7d0d8d1fed9ccdbdbd0d6d1ccd7c4d1d093dbd0dbccd9c790d7d0d8d1" style="color:var(--orange)"><span class="__cf_email__" data-cfemail="167f7870795671647373787e79647f6c79783b73787364716f387f787079"><span class="__cf_email__" data-cfemail="8ae3e4ece5caedf8efefe4e2e5f8e3f0e5e4a7efe4eff8edf3a4e3e4ece5">[email&#160;protected]</span></span></a></div>
 <footer class="footer" style="padding:24px 6vw">
   <div class="footer-bottom" style="margin:0;padding:0;border:none;max-width:1100px">
-    <span>© 2026 GreenHorizon</span>
+    <span>&#169; 2026 GreenHorizon Energy &middot; Antonio Schmidt &middot; Amselweg 29, 32657 Lemgo</span>
     <div style="display:flex;gap:20px">
-      <a href="impressum.html" style="color:rgba(255,255,255,0.4)">Impressum</a>
-      <a href="datenschutz.html" style="color:rgba(255,255,255,0.4)">Datenschutz</a>
+      <a href="impressum.html" style="color:rgba(255,255,255,.4)">Impressum</a>
+      <a href="datenschutz.html" style="color:rgba(255,255,255,.4)">Datenschutz</a>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const S = {
-  step: 0,
-  score: 0,
-  answers: {},
-  tags: [],
-};
+<script>
+// ── State ──────────────────────────────────────────
+var S = { step:0, score:0, produkt:'', answers:{}, tags:[] };
 
-// Initialize header for step 0 on page load
-document.addEventListener('DOMContentLoaded', function() {
-  const h = HEADERS[0];
-  document.getElementById('fStepLabel').textContent   = h[0];
-  document.getElementById('fHeaderTitle').textContent = h[1];
-  document.getElementById('fHeaderSub').textContent   = h[2];
-  // Set first dot active
-  var dots = document.querySelectorAll('.f-dot');
-  dots.forEach(function(d,i){ d.classList.remove('done','active'); });
-  if(dots[0]) dots[0].classList.add('active');
-});
-
-const HEADERS = {
-  0: ['Schritt 1 von 8', 'Kostenlose Energie-Analyse', 'Wähle dein Produkt – dauert nur 2 Minuten'],
-  1: ['Schritt 2 von 8', 'Deine Immobilie', '100% kostenlos & unverbindlich'],
-  2: ['Schritt 3 von 8', 'Dach-Check (Solar)', 'Kurze Einschätzung – nur für Solaranlage'],
-  3: ['Schritt 4 von 8', 'Dein Einsparpotenzial', 'So berechnen wir deine persönliche Ersparnis'],
-  4: ['Schritt 5 von 8', 'Dein Zeitplan', 'Damit dein Partner richtig planen kann'],
-  5: ['Schritt 6 von 8', 'Deine Kaufabsicht', 'Fast am Ziel – noch 2 Schritte'],
-  6: ['Schritt 7 von 8', 'Deine Kontaktdaten', 'Geprüfte Fachbetriebe warten auf dich'],
-  7: ['Schritt 8 von 8', 'Beste Erreichbarkeit', 'Letzter Schritt – dann bist du fertig!'],
-};
-
-const TIERS = [
-  { min:150, label:'🚀 Premium Lead',       cls:'score-premium', msg:'Top-Bewertung! Du gehörst zu unseren bevorzugten Anfragen – ein Fachbetrieb meldet sich schnellstmöglich.' },
-  { min:100, label:'🔥 Hochwertiger Lead',   cls:'score-good',    msg:'Sehr gute Anfrage! Ein geprüfter Fachbetrieb aus deiner Region meldet sich zeitnah bei dir.' },
-  { min: 50, label:'⭐ Gute Anfrage',        cls:'score-mid',     msg:'Deine Anfrage wurde übermittelt. Ein regionaler Partner meldet sich bei dir.' },
-  { min:  0, label:'📋 Anfrage eingegangen', cls:'score-mid',     msg:'Deine Anfrage wurde registriert. Wir prüfen, welcher Partner am besten zu dir passt.' },
+var HEADERS = [
+  ['Schritt 1 von 8','Kostenlose Energie-Analyse','Waehle dein Produkt – 2 Minuten'],
+  ['Schritt 2 von 8','Deine Immobilie','100% kostenlos & unverbindlich'],
+  ['Schritt 3 von 8','Dach-Check','Nur fuer Solaranlage relevant'],
+  ['Schritt 4 von 8','Dein Einsparpotenzial','Basis fuer deine persoenliche Ersparnis'],
+  ['Schritt 5 von 8','Dein Zeitplan','Damit dein Partner planen kann'],
+  ['Schritt 6 von 8','Kaufabsicht','Fast am Ziel – noch 2 Schritte'],
+  ['Schritt 7 von 8','Deine Kontaktdaten','Gepruefe Fachbetriebe warten'],
+  ['Schritt 8 von 8','Beste Erreichbarkeit','Letzter Schritt – dann bist du fertig!']
 ];
 
-function showStep(n) {
-  document.querySelectorAll('.f-step').forEach(s => s.classList.remove('active'));
-  const el = document.getElementById('fStep' + n);
+var TIERS = [
+  {min:150, label:'&#128640; Premium Lead', msg:'Top-Bewertung! Du wirst bevorzugt vermittelt.'},
+  {min:100, label:'&#128293; Hochwertiger Lead', msg:'Sehr gute Anfrage! Ein Fachbetrieb meldet sich zeitnah.'},
+  {min:50,  label:'&#11088; Gute Anfrage', msg:'Deine Anfrage wurde uebermittelt. Ein Partner meldet sich.'},
+  {min:0,   label:'&#128203; Anfrage eingegangen', msg:'Deine Anfrage wurde registriert.'}
+];
+
+// ── Navigation ─────────────────────────────────────
+function goTo(n) {
+  document.querySelectorAll('.f-step').forEach(function(s){ s.classList.remove('active'); });
+  var el = document.getElementById('fStep'+n);
   if (!el) return;
   el.classList.add('active');
   S.step = n;
-  const h = HEADERS[n] || HEADERS[7];
-  // Dynamic step 3 question based on product
-  if (n === 3) {
-    const isWP = S.answers.produkt === 'Waermepumpe';
-    const isCombo = S.answers.produkt === 'Solar + Waermepumpe';
-    const q = document.getElementById('step3question');
-    const s = document.getElementById('step3sub');
-    if (q) q.textContent = isWP ? 'Wie hoch sind deine monatlichen Heizkosten?' : isCombo ? 'Wie hoch sind deine monatlichen Energie­kosten?' : 'Wie hoch sind deine monatlichen Stromkosten?';
-    if (s) s.textContent = isWP ? 'Heizöl, Gas oder Fernwärme – Basis für deine Ersparnis mit Wärmepumpe' : isCombo ? 'Strom- und Heizkosten zusammen – für die Gesamtersparnis' : 'Der wichtigste Faktor für deine persönliche Ersparnis';
-  }
-  document.getElementById('fStepLabel').textContent  = h[0];
+  // Header
+  var h = HEADERS[n] || HEADERS[7];
+  document.getElementById('fStepLabel').textContent   = h[0];
   document.getElementById('fHeaderTitle').textContent = h[1];
   document.getElementById('fHeaderSub').textContent   = h[2];
-  document.querySelectorAll('.f-dot').forEach((d, i) => {
+  // Dots
+  for (var i=0; i<8; i++) {
+    var d = document.getElementById('dot'+i);
+    if (!d) continue;
     d.classList.remove('done','active');
-    if (i <= n-1) d.classList.add('done');
+    if (i < n) d.classList.add('done');
     else if (i === n) d.classList.add('active');
-  });
+  }
+  // Dynamic q3
+  if (n === 3) {
+    var q = document.getElementById('q3');
+    var s = document.getElementById('s3');
+    if (S.produkt === 'Waermepumpe') {
+      q.textContent = 'Wie hoch sind deine monatlichen Heizkosten?';
+      s.textContent = 'Heizoel, Gas oder Fernwaerme – Basis fuer deine Ersparnis';
+    } else if (S.produkt === 'Solar + Waermepumpe') {
+      q.textContent = 'Wie hoch sind deine monatlichen Energiekosten?';
+      s.textContent = 'Strom und Heizkosten zusammen – fuer die Gesamtersparnis';
+    } else {
+      q.textContent = 'Wie hoch sind deine monatlichen Stromkosten?';
+      s.textContent = 'Der wichtigste Faktor fuer deine persoenliche Ersparnis';
+    }
+  }
+  // Score display
+  if (n === 7) {
+    document.getElementById('finalScore').textContent = S.score + ' Punkte';
+  }
 }
-
-function handleProduct(btn) {
-  var value = btn.getAttribute('data-product');
-  var pts   = parseInt(btn.getAttribute('data-pts')) || 0;
-  document.querySelectorAll('.product-card').forEach(function(b) { b.classList.remove('selected'); });
-  btn.classList.add('selected');
-  S.answers.produkt = value;
-  addScore(pts);
-  setTimeout(function() { showStep(1); }, 320);
-}
-function selectProduct(btn, value, pts) { handleProduct(btn); }
 
 function addScore(pts) {
   S.score += pts;
-  const badge = document.getElementById('fScoreBadge');
+  var badge = document.getElementById('fScoreBadge');
   badge.textContent = '⭐ Score: ' + S.score + ' Pkt.';
   badge.classList.add('score-pulse');
-  setTimeout(() => badge.classList.remove('score-pulse'), 400);
+  setTimeout(function(){ badge.classList.remove('score-pulse'); }, 400);
 }
 
-function selectAndNext(btn, stepNum, key, value, pts) {
-  btn.closest('.f-choices').querySelectorAll('.f-choice').forEach(b => b.classList.remove('selected'));
+// ── Product pick ───────────────────────────────────
+function pickProduct(idx, value, pts) {
+  document.querySelectorAll('.product-card').forEach(function(b){ b.classList.remove('selected'); });
+  document.getElementById('prod'+idx).classList.add('selected');
+  S.produkt = value;
+  S.answers.produkt = value;
+  addScore(pts);
+  setTimeout(function(){ goTo(1); }, 320);
+}
+
+// ── Choice pick ────────────────────────────────────
+function pick(btn, stepNum, key, value, pts) {
+  btn.closest('.f-choices').querySelectorAll('.f-choice').forEach(function(b){ b.classList.remove('selected'); });
   btn.classList.add('selected');
   S.answers[key] = value;
   addScore(pts);
-  setTimeout(() => {
-    // Skip Dach-Check (step 2) for Wärmepumpe-only
-    const isWPonly = S.answers.produkt === 'Waermepumpe';
-    let next = stepNum + 1;
-    if (stepNum === 1 && isWPonly) next = 3; // skip dach
-    showStep(next);
-    if (next === 7) refreshFinalScore();
-  }, 320);
+  var next = stepNum + 1;
+  // Skip Dach-Check for Waermepumpe-only
+  if (stepNum === 1 && S.produkt === 'Waermepumpe') next = 3;
+  setTimeout(function(){ goTo(next); }, 320);
 }
 
-function toggleTag(btn) {
-  btn.classList.toggle('selected');
-  const t = btn.textContent.trim();
-  S.tags = S.tags.includes(t) ? S.tags.filter(x => x !== t) : [...S.tags, t];
+function goBackFrom3() {
+  goTo(S.produkt === 'Waermepumpe' ? 1 : 2);
 }
 
-function nextFromStep6() {
-  const name = document.getElementById('fName').value.trim();
-  const tel  = document.getElementById('fTel').value.trim();
-  const plz  = document.getElementById('fPlz').value.trim();
-  let ok = true;
-  if (!name) { markError('fName'); ok = false; }
-  if (!tel)  { markError('fTel');  ok = false; }
-  if (!plz || plz.length < 5) { markError('fPlz'); ok = false; }
+// ── Disqualify ─────────────────────────────────────
+function disqualify() {
+  document.querySelectorAll('.f-step').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('fDisq').classList.add('active');
+  document.getElementById('fTrust').style.display = 'none';
+  document.querySelector('.f-progress').style.display = 'none';
+  document.getElementById('fHeaderTitle').textContent = 'Leider nicht passend';
+  document.getElementById('fHeaderSub').textContent   = 'Wir haben aber eine Alternative fuer dich';
+}
+
+// ── Step 6 submit ──────────────────────────────────
+function submitStep6() {
+  var name = document.getElementById('fName').value.trim();
+  var tel  = document.getElementById('fTel').value.trim();
+  var plz  = document.getElementById('fPlz').value.trim();
+  var ok = true;
+  if (!name) { document.getElementById('fName').classList.add('error'); ok=false; }
+  if (!tel)  { document.getElementById('fTel').classList.add('error');  ok=false; }
+  if (!plz || plz.length < 4) { document.getElementById('fPlz').classList.add('error'); ok=false; }
   if (!ok) return;
-  addScore(20); // bonus: tel provided
+  ['fName','fTel','fPlz'].forEach(function(id){ document.getElementById(id).classList.remove('error'); });
   S.answers.name  = name;
   S.answers.tel   = tel;
   S.answers.email = document.getElementById('fEmail').value.trim();
   S.answers.plz   = plz;
-  showStep(7);
-  refreshFinalScore();
+  addScore(20);
+  goTo(7);
 }
 
-function markError(id) {
-  const el = document.getElementById(id);
-  el.classList.add('error');
-  el.focus();
-  setTimeout(() => el.classList.remove('error'), 2000);
-}
-
-function refreshFinalScore() {
-  document.getElementById('finalScoreNum').textContent = S.score + ' Punkte';
-  const tier = TIERS.find(t => S.score >= t.min) || TIERS[3];
-  document.getElementById('finalScoreTier').textContent = tier.label + (S.score >= 100 ? ' – du wirst bevorzugt vermittelt!' : '');
-}
-
-/* ═══════════════════════════════════════════════
-   LEAD DELIVERY – Formspree (E-Mail) ✅ aktiv
-   Jeder Lead → info@greenhorizon-energy.info
-   Formspree Dashboard: formspree.io/forms
-   ═══════════════════════════════════════════════ */
-
-  const CONFIG = {
-    FORMSPREE_ID: 'mzdjwqwp',   // ✅ aktiv
-    EMAIL:        'info@greenhorizon-energy.info'
-  };
-
+// ── Final submit ───────────────────────────────────
 async function submitFunnel() {
-  const lead = {
-    ...S.answers,
-    score: S.score,
-    erreichbarkeit: S.tags,
-    ts: new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })
-  };
+  var tags = [];
+  document.querySelectorAll('.f-tag.selected').forEach(function(t){ tags.push(t.textContent.trim()); });
+  S.answers.erreichbarkeit = tags;
+  S.answers.ts = new Date().toLocaleString('de-DE');
 
-  const tier = TIERS.find(t => S.score >= t.min) || TIERS[3];
-
-  // ── Sofort UI zeigen ──────────────────────────
-  document.getElementById('fStep7').classList.remove('active');
+  // UI
+  document.querySelectorAll('.f-step').forEach(function(s){ s.classList.remove('active'); });
   document.getElementById('fTrust').style.display = 'none';
-  const badge = document.getElementById('scoreResultBadge');
-  badge.textContent = tier.label;
-  badge.className = 'f-score-result ' + tier.cls;
-  document.getElementById('successMsg').textContent = tier.msg;
-  document.getElementById('fSuccess').style.display = 'block';
+  var tier = TIERS.find(function(t){ return S.score >= t.min; }) || TIERS[3];
+  document.getElementById('fScoreResult').innerHTML = tier.label;
+  document.getElementById('fSuccessMsg').textContent = tier.msg;
+  document.getElementById('fSuccess').classList.add('active');
   document.getElementById('fHeaderTitle').textContent = 'Anfrage erfolgreich!';
-  document.getElementById('fHeaderSub').textContent = (lead.produkt || 'Solar') + ' – ein Partner meldet sich bald';
-  document.getElementById('fHeaderSub').textContent   = 'Danke – ein Partner meldet sich bald';
+  document.getElementById('fHeaderSub').textContent   = S.produkt + ' – ein Partner meldet sich';
   document.getElementById('fStepLabel').textContent   = 'Fertig ✓';
-  document.querySelectorAll('.f-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
 
-  // ── 1. E-Mail via Formspree ───────────────────
+  // Formspree
   try {
-    await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    await fetch('https://formspree.io/f/mzdjwqwp', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
       body: JSON.stringify({
-        _subject: `🔥 Neuer Lead – ${lead.produkt || 'Solar'} – ${tier.label} – Score: ${lead.score} Pkt – ${lead.name || 'Unbekannt'} (${lead.plz || '?'})`,
-        '🔧 Produkt':         (lead.produkt || '').replace('Waermepumpe','Wärmepumpe').replace('Solar + Waermepumpe','Solar + Wärmepumpe') || '–',
-        '⭐ Lead-Score':      `${lead.score} Punkte – ${tier.label}`,
-        '👤 Name':            lead.name        || '–',
-        '📞 Telefon':         lead.tel         || '–',
-        '📧 E-Mail':          lead.email       || '–',
-        '📍 PLZ':             lead.plz         || '–',
-        '🏠 Eigenheim':       lead.eigenheim   || '–',
-        '🌞 Dach':            lead.dach        || '–',
-        '⚡ Stromkosten':     lead.strom       || '–',
-        '📅 Zeitrahmen':      lead.zeitrahmen  || '–',
-        '✅ Kaufabsicht':     lead.intention   || '–',
-        '🕐 Erreichbarkeit':  lead.erreichbarkeit?.join(', ') || '–',
-        '🕒 Zeitstempel':     lead.ts,
+        _subject: 'Neuer Lead – ' + S.produkt + ' – Score: ' + S.score + ' – ' + (S.answers.name||'?') + ' (' + (S.answers.plz||'?') + ')',
+        'Produkt':        S.produkt,
+        'Score':          S.score + ' Punkte',
+        'Name':           S.answers.name   || '–',
+        'Telefon':        S.answers.tel    || '–',
+        'E-Mail':         S.answers.email  || '–',
+        'PLZ':            S.answers.plz    || '–',
+        'Eigenheim':      S.answers.eigenheim || '–',
+        'Dach':           S.answers.dach   || '–',
+        'Kosten':         S.answers.kosten || '–',
+        'Zeitrahmen':     S.answers.zeitrahmen || '–',
+        'Intention':      S.answers.intention  || '–',
+        'Erreichbarkeit': tags.join(', ')  || '–',
+        'Zeitstempel':    S.answers.ts
       })
     });
-  } catch(e) { console.warn('Formspree error:', e); }
-
-  // Telegram deaktiviert – nur E-Mail via Formspree aktiv
+  } catch(e) { console.warn('Formspree:', e); }
 }
 
-function disqualify() {
-  document.getElementById('fStep1').classList.remove('active');
-  document.getElementById('fTrust').style.display = 'none';
-  document.querySelector('.f-progress').style.display = 'none';
-  document.getElementById('fDisqualify').classList.add('active');
-  document.getEleme
+// ── Nav helpers ────────────────────────────────────
+function toggleNav() { var el=document.getElementById('navLinks'); if(el) el.classList.toggle('open'); }
+document.querySelectorAll('.nav-drop-toggle').forEach(function(b){
+  b.addEventListener('click', function(e){ e.preventDefault(); b.closest('.nav-dropdown').classList.toggle('active'); });
+});
+document.addEventListener('click', function(e){
+  if (!e.target.closest('.nav-dropdown')) document.querySelectorAll('.nav-dropdown').forEach(function(d){ d.classList.remove('active'); });
+});
+</script>
+<script src="cookies.js"></script>
+</body>
+</html>
