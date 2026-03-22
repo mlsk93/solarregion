@@ -283,9 +283,22 @@
       <p class="f-sub">Wähle dein Wunschprodukt – wir finden den passenden Fachbetrieb</p>
 
       <div class="product-grid">
-        <button class="product-card" onclick="selectProduct(this,'Solar + Wärmepumpe',70)">
-          <span class="product-icon">🏠<br><small style="font-size:0.6em">☀+🌡</small></span>
-          <div class="product-name">Solaranlage +<br>Wärmepumpe</div>
+        <button class="product-card" data-product="Solar-Waermepumpe" data-pts="70" onclick="handleProduct(this)">
+          <span class="product-icon">&#127968;<br><small style="font-size:0.6em">&#9728;+&#127777;</small></span>
+          <div class="product-name">Solaranlage +<br>W&auml;rmepumpe</div>
+          <div class="product-sub">Maximale Ersparnis</div>
+        </button>
+        <button class="product-card" data-product="Solaranlage" data-pts="0" onclick="handleProduct(this)">
+          <span class="product-icon">&#9728;</span>
+          <div class="product-name">Solaranlage</div>
+          <div class="product-sub">Strom selbst erzeugen</div>
+        </button>
+        <button class="product-card" data-product="Waermepumpe" data-pts="0" onclick="handleProduct(this)">
+          <span class="product-icon">&#127777;</span>
+          <div class="product-name">W&auml;rmepumpe</div>
+          <div class="product-sub">Heizen mit Umw&auml;ltw&auml;rme</div>
+        </button>
+      </div>
           <div class="product-sub">Maximale Ersparnis</div>
         </button>
         <button class="product-card" onclick="selectProduct(this,'Solaranlage',0)">
@@ -539,11 +552,23 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const S = {
-  step: 1,
+  step: 0,
   score: 0,
   answers: {},
   tags: [],
 };
+
+// Initialize header for step 0 on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const h = HEADERS[0];
+  document.getElementById('fStepLabel').textContent   = h[0];
+  document.getElementById('fHeaderTitle').textContent = h[1];
+  document.getElementById('fHeaderSub').textContent   = h[2];
+  // Set first dot active
+  var dots = document.querySelectorAll('.f-dot');
+  dots.forEach(function(d,i){ d.classList.remove('done','active'); });
+  if(dots[0]) dots[0].classList.add('active');
+});
 
 const HEADERS = {
   0: ['Schritt 1 von 8', 'Kostenlose Energie-Analyse', 'Wähle dein Produkt – dauert nur 2 Minuten'],
@@ -572,8 +597,8 @@ function showStep(n) {
   const h = HEADERS[n] || HEADERS[7];
   // Dynamic step 3 question based on product
   if (n === 3) {
-    const isWP = S.answers.produkt === 'Wärmepumpe';
-    const isCombo = S.answers.produkt === 'Solar + Wärmepumpe';
+    const isWP = S.answers.produkt === 'Waermepumpe';
+    const isCombo = S.answers.produkt === 'Solar + Waermepumpe';
     const q = document.getElementById('step3question');
     const s = document.getElementById('step3sub');
     if (q) q.textContent = isWP ? 'Wie hoch sind deine monatlichen Heizkosten?' : isCombo ? 'Wie hoch sind deine monatlichen Energie­kosten?' : 'Wie hoch sind deine monatlichen Stromkosten?';
@@ -589,13 +614,16 @@ function showStep(n) {
   });
 }
 
-function selectProduct(btn, value, pts) {
-  document.querySelectorAll('.product-card').forEach(b => b.classList.remove('selected'));
+function handleProduct(btn) {
+  var value = btn.getAttribute('data-product');
+  var pts   = parseInt(btn.getAttribute('data-pts')) || 0;
+  document.querySelectorAll('.product-card').forEach(function(b) { b.classList.remove('selected'); });
   btn.classList.add('selected');
   S.answers.produkt = value;
   addScore(pts);
-  setTimeout(() => showStep(1), 320);
+  setTimeout(function() { showStep(1); }, 320);
 }
+function selectProduct(btn, value, pts) { handleProduct(btn); }
 
 function addScore(pts) {
   S.score += pts;
@@ -612,7 +640,7 @@ function selectAndNext(btn, stepNum, key, value, pts) {
   addScore(pts);
   setTimeout(() => {
     // Skip Dach-Check (step 2) for Wärmepumpe-only
-    const isWPonly = S.answers.produkt === 'Wärmepumpe';
+    const isWPonly = S.answers.produkt === 'Waermepumpe';
     let next = stepNum + 1;
     if (stepNum === 1 && isWPonly) next = 3; // skip dach
     showStep(next);
@@ -699,7 +727,7 @@ async function submitFunnel() {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         _subject: `🔥 Neuer Lead – ${lead.produkt || 'Solar'} – ${tier.label} – Score: ${lead.score} Pkt – ${lead.name || 'Unbekannt'} (${lead.plz || '?'})`,
-        '🔧 Produkt':         lead.produkt     || '–',
+        '🔧 Produkt':         (lead.produkt || '').replace('Waermepumpe','Wärmepumpe').replace('Solar + Waermepumpe','Solar + Wärmepumpe') || '–',
         '⭐ Lead-Score':      `${lead.score} Punkte – ${tier.label}`,
         '👤 Name':            lead.name        || '–',
         '📞 Telefon':         lead.tel         || '–',
