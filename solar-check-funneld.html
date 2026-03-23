@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar-Check – Lohnt sich Solar für Sie? | GreenHorizon</title>
+<meta name="description" content="In 2 Minuten kostenlos prüfen, ob sich eine Solaranlage für Ihr Haus lohnt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#0C6E3D;--green-dark:#094f2c;--green-light:#E8F5EE;
+  --blue:#1B3A6B;--blue-mid:#2B5199;
+  --gold:#FFB800;--gold-hover:#FFC933;
+  --text:#0D1B2A;--text-mid:#4A5568;--text-light:#8A9BAE;
+  --border:#E2E8F0;--bg:#F4F6F9;--white:#fff;
+  --shadow:0 2px 16px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 48px rgba(0,0,0,.12);
+  --radius:16px;--radius-sm:10px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* ── TOPBAR ───────────────────────────────────────────── */
+.topbar{background:var(--green-dark);color:rgba(255,255,255,.85);text-align:center;padding:10px;font-size:.78rem;font-weight:500;letter-spacing:.01em}
+.topbar a{color:#fff;text-decoration:none;font-weight:700}
+
+/* ── NAV ──────────────────────────────────────────────── */
+.nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;font-size:1.1rem;color:var(--blue)}
+.nav-logo svg{color:var(--green)}
+.nav-badge{background:var(--green-light);color:var(--green);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:50px;border:1px solid rgba(12,110,61,.2)}
+
+/* ── WRAPPER ──────────────────────────────────────────── */
+.wrapper{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:32px 16px 60px}
+.box{width:100%;max-width:660px;background:var(--white);border-radius:24px;box-shadow:var(--shadow-lg);overflow:hidden}
+
+/* ── HERO TOP ─────────────────────────────────────────── */
+.hero-top{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);padding:24px 32px 20px;position:relative;overflow:hidden}
+.hero-top::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
+.hero-top::after{content:'☀️';position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:3rem;opacity:.15;line-height:1}
+.hero-kicker{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.55);margin-bottom:6px}
+.hero-title{font-size:1.2rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:4px}
+.hero-sub{font-size:.82rem;color:rgba(255,255,255,.65)}
+
+/* ── PROGRESS ─────────────────────────────────────────── */
+.prog-wrap{padding:14px 32px 0;background:#fff}
+.prog-label{font-size:.75rem;font-weight:700;color:var(--text-mid);margin-bottom:8px;display:flex;justify-content:space-between}
+.prog-label span:last-child{color:var(--green);font-weight:800}
+.prog-bar{height:6px;background:var(--border);border-radius:50px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--green) 0%,#2ECC71 100%);border-radius:50px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.prog-check{width:20px;height:20px;background:var(--green);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-left:8px;position:relative;top:1px}
+.prog-check svg{color:#fff;width:11px;height:11px}
+
+/* ── STEPS ────────────────────────────────────────────── */
+.step{padding:28px 32px 32px;display:none}
+.step.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.step-q{font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:4px;line-height:1.3}
+.step-sub{font-size:.82rem;color:var(--text-mid);margin-bottom:22px}
+
+/* ── STATE GRID (Bundesland) ──────────────────────────── */
+.state-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.state-btn{display:flex;align-items:center;gap:10px;padding:14px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);background:#fff;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:600;color:var(--text);transition:all .2s;text-align:left}
+.state-btn:hover{border-color:var(--blue-mid);background:#F0F4FF}
+.state-btn.sel{border-color:var(--blue);background:rgba(27,58,107,.06)}
+.state-shape{width:28px;height:28px;object-fit:contain;flex-shrink:0;filter:brightness(0) saturate(100%) invert(17%) sepia(60%) saturate(700%) hue-rotate(190deg)}
+
+/* ── CARD GRID (Haustyp / Dachform) ──────────────────── */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card-grid.cols3{grid-template-columns:repeat(3,1fr)}
+.card-btn{border:2px solid var(--border);border-radius:var(--radius);padding:22px 14px 18px;cursor:pointer;text-align:center;background:#fff;transition:all .22s;position:relative;display:flex;flex-direction:column;align-items:center}
+.card-btn:hover{border-color:var(--blue-mid);box-shadow:0 4px 20px rgba(27,58,107,.1)}
+.card-btn.sel{border-color:var(--blue);background:rgba(27,58,107,.04)}
+.card-btn.sel::after{content:'✓';position:absolute;top:8px;right:10px;width:20px;height:20px;background:var(--blue);color:#fff;border-radius:50%;font-size:.65rem;font-weight:800;display:grid;place-items:center}
+.card-icon{width:70px;height:60px;margin-bottom:10px}
+.card-icon svg{width:100%;height:100%}
+.card-label{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.3}
+
+/* ── PHOTO GRID (Dachbelag) ───────────────────────────── */
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.photo-btn{border:2px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;background:#fff;transition:all .22s;position:relative}
+.photo-btn:hover{border-color:var(--blue-mid)}
+.photo-btn.sel{border-color:var(--blue)}
+.photo-btn.sel::after{content:'✓';position:absolute;top:8px;right:10px;width:22px;height:22px;background:var(--blue);color:#fff;border-radius:50%;font-size:.7rem;font-weight:800;display:grid;place-items:center}
+.photo-img{width:100%;height:100px;object-fit:cover;display:block;background:#ddd}
+.photo-sample{width:100%;height:100px;display:block}
+.photo-label{padding:10px 12px;font-size:.85rem;font-weight:700;color:var(--text)}
+
+/* ── COUNT GRID (Personen) ────────────────────────────── */
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:480px){.count-grid{grid-template-columns:1fr 1fr}}
+.count-btn{border:2px solid var(--border);border-radius:var(--radius);padding:20px 8px 16px;cursor:pointer;text-align:center;background:#fff;transition:all .22s;position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
+.count-btn:hover{border-color:var(--blue-mid)}
+.count-btn.sel{border-color:var(--blue);background:rgba(27,58,107,.04)}
+.count-btn.sel::after{content:'✓';position:absolute;top:6px;right:8px;width:18px;height:18px;background:var(--blue);color:#fff;border-radius:50%;font-size:.6rem;font-weight:800;display:grid;place-items:center}
+.count-label{font-size:.9rem;font-weight:700;color:var(--text)}
+
+/* ── ADDRESS FORM ─────────────────────────────────────── */
+.addr-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.form-group{margin-bottom:14px}
+.form-label{font-size:.78rem;font-weight:700;color:var(--text-mid);margin-bottom:6px;display:block}
+.form-input{width:100%;padding:13px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:.95rem;color:var(--text);background:#fff;transition:border-color .2s}
+.form-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(27,58,107,.08)}
+.form-input.err{border-color:#E53E3E}
+.map-box{border-radius:var(--radius);overflow:hidden;margin-bottom:16px;background:#C8D8C8;position:relative;height:160px;display:flex;align-items:center;justify-content:center}
+.map-placeholder{width:100%;height:100%;object-fit:cover}
+
+/* map SVG simulation */
+.map-svg{width:100%;height:160px}
+
+/* ── ANREDE + NAME ────────────────────────────────────── */
+.anrede-row{display:flex;gap:16px;margin-bottom:14px}
+.radio-card{flex:1;display:flex;align-items:center;gap:8px;padding:13px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
+.radio-card:hover{border-color:var(--blue-mid)}
+.radio-card.sel{border-color:var(--blue);background:rgba(27,58,107,.05)}
+.radio-card input{accent-color:var(--blue);width:16px;height:16px}
+
+/* ── CTA BUTTON ───────────────────────────────────────── */
+.cta-btn{width:100%;padding:16px 24px;background:var(--blue);color:#fff;border:none;border-radius:50px;font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(27,58,107,.3);margin-top:8px}
+.cta-btn:hover{background:var(--blue-mid);transform:translateY(-1px);box-shadow:0 6px 28px rgba(27,58,107,.4)}
+.cta-btn.gold{background:var(--gold);color:var(--text);box-shadow:0 4px 20px rgba(255,184,0,.35)}
+.cta-btn.gold:hover{background:var(--gold-hover);transform:translateY(-1px)}
+.back-btn{background:none;border:none;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--text-mid);cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 0;margin-top:10px;transition:color .2s}
+.back-btn:hover{color:var(--text)}
+
+/* ── TRUST STRIP ──────────────────────────────────────── */
+.trust-strip{display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 32px;background:#FAFBFA;border-top:1px solid var(--border);font-size:.73rem;color:var(--text-light);font-weight:600;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:5px}
+.trust-icon{color:var(--green);font-size:.85rem}
+
+/* ── PACKAGE CARD ─────────────────────────────────────── */
+.pkg-card{background:rgba(27,58,107,.05);border:1px solid rgba(27,58,107,.12);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.pkg-info{font-size:.82rem;color:var(--text-mid)}
+.pkg-name{font-size:1rem;font-weight:800;color:var(--text);margin-bottom:2px}
+.pkg-price{font-size:.95rem;font-weight:700;color:var(--green)}
+.pkg-img{width:80px;height:64px;border-radius:10px;object-fit:cover;background:#C8D8C8;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.avail-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--green-light);border:1px solid rgba(12,110,61,.2);border-radius:8px;font-size:.78rem;font-weight:700;color:var(--green);margin-bottom:18px}
+
+/* ── SOURCE GRID ──────────────────────────────────────── */
+.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.source-btn{padding:14px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);background:#fff;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:600;color:var(--text);transition:all .2s;text-align:center}
+.source-btn:hover{border-color:var(--blue-mid)}
+.source-btn.sel{border-color:var(--blue);background:rgba(27,58,107,.05);color:var(--blue)}
+.skip-link{text-align:right;margin-top:14px}
+.skip-btn{background:var(--blue);color:#fff;border:none;padding:12px 22px;border-radius:50px;font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.skip-btn:hover{background:var(--blue-mid)}
+
+/* ── SUCCESS ──────────────────────────────────────────── */
+.success-wrap{padding:40px 32px;text-align:center;display:none}
+.success-wrap.active{display:block;animation:fadeUp .4s ease}
+.success-img{width:100%;border-radius:var(--radius);overflow:hidden;margin-bottom:24px;background:var(--bg);position:relative;min-height:200px;display:flex;align-items:center;justify-content:center}
+.success-cta-gold{background:var(--gold);border-radius:12px;padding:22px 24px;text-align:center;margin-bottom:4px}
+.success-cta-gold a{color:var(--text);text-decoration:none;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;gap:8px}
+.success-cta-blue{background:var(--blue);border-radius:0 0 12px 12px;padding:14px 24px;text-align:center;margin-bottom:20px}
+.success-cta-blue a{color:#fff;text-decoration:none;font-size:.9rem;font-weight:600}
+.next-steps{text-align:left;margin-top:20px}
+.next-steps h3{font-size:.9rem;font-weight:800;color:var(--text);margin-bottom:14px}
+.next-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;font-size:.85rem;color:var(--text-mid)}
+.next-num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:800;flex-shrink:0}
+.next-num.done{background:var(--green);color:#fff}
+.next-num.pending{background:var(--blue);color:#fff}
+
+/* ── TERMIN GRID ──────────────────────────────────────── */
+.termin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.termin-btn{padding:20px 12px;border:2px solid var(--border);border-radius:var(--radius);background:#fff;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:700;color:var(--text);transition:all .2s;text-align:center}
+.termin-btn:hover{border-color:var(--blue-mid)}
+.termin-btn.sel{border-color:var(--blue);background:rgba(27,58,107,.04)}
+
+/* ── MISC ─────────────────────────────────────────────── */
+.disclaimer{font-size:.71rem;color:var(--text-light);line-height:1.6;margin-top:12px}
+.disclaimer a{color:var(--blue)}
+.section-title{font-size:.82rem;font-weight:700;color:var(--text-mid);margin-bottom:6px}
+
+@media(max-width:520px){
+  .step{padding:22px 18px 26px}
+  .hero-top{padding:20px 18px 16px}
+  .prog-wrap{padding:12px 18px 0}
+  .trust-strip{padding:12px 18px}
+  .state-grid,.card-grid,.photo-grid,.source-grid{grid-template-columns:1fr 1fr}
+  .card-grid.cols3{grid-template-columns:repeat(2,1fr)}
+  .termin-grid{grid-template-columns:1fr}
+  .count-grid{grid-template-columns:1fr 1fr}
+  .addr-grid{grid-template-columns:1fr}
+  .success-wrap{padding:28px 18px}
+}
+@media(max-width:360px){
+  .state-grid,.photo-grid,.card-grid,.card-grid.cols3,.source-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  🔒 Kostenlos &amp; unverbindlich &nbsp;·&nbsp; ✓ Geprüfte Fachbetriebe &nbsp;·&nbsp; 📞 <a href="tel:+4915150490420">015150490420</a>
+</div>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="5" fill="currentColor"/><path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.93 4.93l1.41 1.41M15.66 15.66l1.41 1.41M4.93 17.07l1.41-1.41M15.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    Green<span style="color:var(--green)">Horizon</span>
+  </a>
+  <span class="nav-badge">⭐ Lohnt sich Solar für Sie?</span>
+</nav>
+
+<!-- FUNNEL BOX -->
+<div class="wrapper">
+<div class="box" id="box">
+
+  <!-- HERO HEADER -->
+  <div class="hero-top">
+    <div class="hero-kicker" id="hKicker">Schritt 1 von 11</div>
+    <div class="hero-title" id="hTitle">Lohnt sich Solar für Sie? In 2 Minuten testen:</div>
+    <div class="hero-sub" id="hSub">Kostenlose Analyse – 100 % unverbindlich</div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="prog-wrap">
+    <div class="prog-label">
+      <span id="progTxt">10 % geschafft</span>
+      <span id="progPct" style="display:flex;align-items:center">
+        <span id="progChk" style="display:none" class="prog-check">
+          <svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </span>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:10%"></div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 0 – BUNDESLAND
+  ════════════════════════════════════════════════════ -->
+  <div class="step active" id="s0">
+    <p class="step-q">In welchem Bundesland leben Sie?</p>
+    <p class="step-sub">Für Ihr persönliches Solarangebot</p>
+    <div class="state-grid">
+      <button class="state-btn" onclick="stateClick(this,'Nordrhein-Westfalen')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M8 18 L14 10 L22 8 L30 12 L38 10 L44 16 L50 20 L48 28 L52 34 L46 40 L44 48 L36 50 L28 46 L20 50 L14 44 L10 36 L6 28 Z"/></svg>
+        Nordrhein-Westfalen
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Bayern')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M10 14 L20 8 L32 10 L44 8 L52 14 L54 24 L50 32 L52 42 L44 52 L32 54 L22 50 L12 52 L8 42 L10 32 L6 22 Z"/></svg>
+        Bayern
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Rheinland-Pfalz')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M12 10 L22 8 L30 14 L28 24 L34 30 L32 40 L24 48 L14 44 L8 34 L10 24 Z"/></svg>
+        Rheinland-Pfalz
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Hessen')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M18 10 L30 8 L38 14 L42 24 L36 32 L38 40 L28 46 L18 42 L12 32 L14 22 Z"/></svg>
+        Hessen
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Niedersachsen')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M6 12 L20 8 L36 10 L48 14 L50 24 L44 30 L46 38 L36 44 L22 46 L12 40 L8 30 L6 20 Z"/></svg>
+        Niedersachsen
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Baden-Württemberg')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M14 10 L28 8 L38 12 L42 22 L38 32 L40 44 L28 52 L16 48 L10 38 L12 26 Z"/></svg>
+        Baden-Württemberg
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Sachsen')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="currentColor" style="color:#1B3A6B"><path d="M16 14 L30 10 L42 14 L44 26 L38 34 L34 44 L20 44 L14 34 L12 24 Z"/></svg>
+        Sachsen
+      </button>
+      <button class="state-btn" onclick="stateClick(this,'Anderes Bundesland')">
+        <svg class="state-shape" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3" style="color:#1B3A6B"><circle cx="30" cy="30" r="16"/><path d="M30 20 v10 l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Anderes Bundesland
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 1 – HAUSTYP
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s1">
+    <p class="step-q">In welchem Haustyp wohnen Sie?</p>
+    <p class="step-sub">Für die passende Dimensionierung Ihrer Anlage</p>
+    <div class="card-grid">
+      <!-- Reihenhaus -->
+      <button class="card-btn" onclick="cardClick(this,'haustyp','Reihenhaus',1)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="2" y="28" width="24" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="26" y="28" width="24" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="50" y="28" width="24" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="2,28 14,12 26,28" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="26,28 38,12 50,28" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="50,28 62,12 74,28" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="10" y="34" width="6" height="6" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="34" y="34" width="6" height="6" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="58" y="34" width="6" height="6" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="9" y="44" width="8" height="12" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="33" y="44" width="8" height="12" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="57" y="44" width="8" height="12" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Reihenhaus</div>
+      </button>
+      <!-- Doppelhaushälfte -->
+      <button class="card-btn" onclick="cardClick(this,'haustyp','Doppelhaushälfte',1)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="6" y="28" width="32" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="38" y="28" width="32" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="6,28 22,8 38,28" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="38,28 54,8 70,28" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="13" y="34" width="8" height="8" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="45" y="34" width="8" height="8" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="17" y="45" width="10" height="11" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="49" y="45" width="10" height="11" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Doppelhaus­hälfte</div>
+      </button>
+      <!-- Einfamilienhaus -->
+      <button class="card-btn" onclick="cardClick(this,'haustyp','Einfamilienhaus',1)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="14" y="28" width="52" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="14,28 40,8 66,28" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="22" y="34" width="10" height="10" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="48" y="34" width="10" height="10" rx="1" fill="#1B3A6B" opacity=".5"/>
+          <rect x="34" y="44" width="12" height="12" rx="1" fill="#1B3A6B" opacity=".45"/>
+        </svg>
+        <div class="card-label">Einfamilienhaus</div>
+      </button>
+      <!-- Gewerbe -->
+      <button class="card-btn" onclick="cardClick(this,'haustyp','Gewerbe',1)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="8" y="20" width="64" height="36" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="8" y="14" width="64" height="8" rx="1" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="14" y="28" width="8" height="8" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="28" y="28" width="8" height="8" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="44" y="28" width="8" height="8" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="58" y="28" width="8" height="8" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="32" y="44" width="16" height="12" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Gewerbe</div>
+      </button>
+      <!-- Mehrfamilienhaus -->
+      <button class="card-btn" onclick="cardClick(this,'haustyp','Mehrfamilienhaus',1)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="16" y="16" width="48" height="40" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="16" y="10" width="48" height="8" rx="1" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="22" y="22" width="7" height="7" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="37" y="22" width="7" height="7" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="52" y="22" width="7" height="7" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="22" y="34" width="7" height="7" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="37" y="34" width="7" height="7" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="52" y="34" width="7" height="7" rx="1" fill="#1B3A6B" opacity=".45"/>
+          <rect x="34" y="48" width="12" height="8" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Mehrfamilienhaus</div>
+      </button>
+      <!-- Anderes -->
+      <button class="card-btn" onclick="cardClick(this,'haustyp','Anderes',1)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <text x="14" y="40" font-size="30" fill="#8A9BAE" font-family="Arial">???</text>
+        </svg>
+        <div class="card-label">Anderes</div>
+      </button>
+    </div>
+    <button class="back-btn" onclick="goTo(0)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 2 – DACHFORM
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s2">
+    <p class="step-q">Welche Dachform hat Ihr Haus?</p>
+    <p class="step-sub">Wichtig für die optimale Platzierung der Solarmodule</p>
+    <div class="card-grid">
+      <!-- Satteldach -->
+      <button class="card-btn" onclick="cardClick(this,'dachform','Satteldach',2)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="12" y="32" width="56" height="22" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="8,32 40,10 72,32" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="19" y="38" width="10" height="9" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="51" y="38" width="10" height="9" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="34" y="44" width="12" height="10" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Satteldach</div>
+      </button>
+      <!-- Flachdach -->
+      <button class="card-btn" onclick="cardClick(this,'dachform','Flachdach',2)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="12" y="26" width="56" height="28" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="8" y="22" width="64" height="6" rx="2" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="19" y="34" width="10" height="9" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="51" y="34" width="10" height="9" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="34" y="42" width="12" height="12" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Flachdach</div>
+      </button>
+      <!-- Pultdach -->
+      <button class="card-btn" onclick="cardClick(this,'dachform','Pultdach',2)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <rect x="12" y="30" width="56" height="24" rx="1" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <polygon points="8,30 68,18 72,30" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.5"/>
+          <rect x="19" y="36" width="10" height="9" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="51" y="36" width="10" height="9" rx="1" fill="#1B3A6B" opacity=".4"/>
+          <rect x="34" y="44" width="12" height="10" rx="1" fill="#1B3A6B" opacity=".4"/>
+        </svg>
+        <div class="card-label">Pultdach</div>
+      </button>
+      <!-- Anderes -->
+      <button class="card-btn" onclick="cardClick(this,'dachform','Anderes',2)">
+        <svg class="card-icon" viewBox="0 0 80 60" fill="none">
+          <text x="14" y="40" font-size="30" fill="#8A9BAE" font-family="Arial">???</text>
+        </svg>
+        <div class="card-label">Anderes</div>
+      </button>
+    </div>
+    <button class="back-btn" onclick="goTo(1)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 3 – DACHBELAG
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s3">
+    <p class="step-q">Welchen Dachbelag hat Ihr Haus?</p>
+    <p class="step-sub">Für die Montageplanung der Solarmodule</p>
+    <div class="photo-grid">
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Ton-/Betonziegel',3)">
+        <svg class="photo-sample" viewBox="0 0 160 100">
+          <defs><pattern id="tile1" width="20" height="14" patternUnits="userSpaceOnUse"><rect width="20" height="14" fill="#C0522E"/><ellipse cx="10" cy="7" rx="8" ry="5" fill="#B04828"/><line x1="0" y1="14" x2="20" y2="14" stroke="#9A3C1E" stroke-width="1"/></pattern></defs>
+          <rect width="160" height="100" fill="url(#tile1)"/>
+        </svg>
+        <div class="photo-label">Gewellte Ton- o. Betonziegel</div>
+      </button>
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Metall/Blech',3)">
+        <svg class="photo-sample" viewBox="0 0 160 100">
+          <defs><pattern id="tile2" width="20" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#B0B8C0"/><rect y="4" width="20" height="2" fill="#A0A8B0"/></pattern></defs>
+          <rect width="160" height="100" fill="url(#tile2)"/>
+        </svg>
+        <div class="photo-label">Metall / Blech</div>
+      </button>
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Flachziegel',3)">
+        <svg class="photo-sample" viewBox="0 0 160 100">
+          <defs><pattern id="tile3" width="22" height="16" patternUnits="userSpaceOnUse"><rect width="22" height="16" fill="#505878"/><rect x="1" y="1" width="20" height="14" rx="1" fill="#404860"/><rect x="0" y="14" width="22" height="2" fill="#30384A"/></pattern></defs>
+          <rect width="160" height="100" fill="url(#tile3)"/>
+        </svg>
+        <div class="photo-label">Flachziegel</div>
+      </button>
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Schiefer/Schindeln',3)">
+        <svg class="photo-sample" viewBox="0 0 160 100">
+          <defs><pattern id="tile4" width="24" height="14" patternUnits="userSpaceOnUse"><rect width="24" height="14" fill="#5A6070"/><ellipse cx="12" cy="7" rx="10" ry="5" fill="#4A5060" stroke="#3A4050" stroke-width=".5"/></pattern></defs>
+          <rect width="160" height="100" fill="url(#tile4)"/>
+        </svg>
+        <div class="photo-label">Schiefer / Schindeln</div>
+      </button>
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Biberschwanz',3)">
+        <svg class="photo-sample" viewBox="0 0 160 100">
+          <defs><pattern id="tile5" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#B85030"/><rect x="1" y="1" width="16" height="14" rx="8" fill="#A84020" stroke="#983010" stroke-width=".5"/></pattern></defs>
+          <rect width="160" height="100" fill="url(#tile5)"/>
+        </svg>
+        <div class="photo-label">Biberschwanz</div>
+      </button>
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Bitumen',3)">
+        <svg class="photo-sample" viewBox="0 0 160 100">
+          <defs><pattern id="tile6" width="20" height="12" patternUnits="userSpaceOnUse"><rect width="20" height="12" fill="#3A3A3A"/><rect x="1" y="1" width="18" height="10" rx="1" fill="#2A2A2A"/><line x1="0" y1="12" x2="20" y2="12" stroke="#1A1A1A" stroke-width="1"/></pattern></defs>
+          <rect width="160" height="100" fill="url(#tile6)"/>
+        </svg>
+        <div class="photo-label">Bitumen</div>
+      </button>
+      <button class="photo-btn" onclick="cardClick(this,'dachbelag','Weiß nicht',3)" style="grid-column:1/-1">
+        <div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#8A9BAE">???</div>
+        <div class="photo-label" style="text-align:center">Weiß nicht</div>
+      </button>
+    </div>
+    <button class="back-btn" onclick="goTo(2)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 4 – PERSONEN
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s4">
+    <p class="step-q">Wie viele Personen leben in Ihrem Haus?</p>
+    <p class="step-sub">Für die Berechnung des optimalen Stromsparpotenzials</p>
+    <div class="count-grid">
+      <button class="count-btn" onclick="cardClick(this,'personen','1-2',4)">
+        <svg width="44" height="36" viewBox="0 0 44 36" fill="none">
+          <circle cx="14" cy="10" r="7" fill="#C8D4E8" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M4 32 Q4 22 14 22 Q24 22 24 32" fill="#C8D4E8" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="30" cy="10" r="7" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M20 32 Q20 22 30 22 Q40 22 40 32" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="count-label">1 – 2</div>
+      </button>
+      <button class="count-btn" onclick="cardClick(this,'personen','3-4',4)">
+        <svg width="52" height="40" viewBox="0 0 52 40" fill="none">
+          <circle cx="10" cy="10" r="6" fill="#C8D4E8" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M2 36 Q2 26 10 26 Q18 26 18 36" fill="#C8D4E8" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="26" cy="8" r="7" fill="#B0C4E0" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M16 36 Q16 24 26 24 Q36 24 36 36" fill="#B0C4E0" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="42" cy="10" r="6" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M34 36 Q34 26 42 26 Q50 26 50 36" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="count-label">3 – 4</div>
+      </button>
+      <button class="count-btn" onclick="cardClick(this,'personen','5+',4)">
+        <svg width="52" height="40" viewBox="0 0 52 40" fill="none">
+          <circle cx="10" cy="10" r="6" fill="#C8D4E8" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M2 36 Q2 26 10 26 Q18 26 18 36" fill="#C8D4E8" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="26" cy="8" r="7" fill="#B0C4E0" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M16 36 Q16 24 26 24 Q36 24 36 36" fill="#B0C4E0" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="42" cy="10" r="6" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5"/>
+          <path d="M34 36 Q34 26 42 26 Q50 26 50 36" fill="#E8F0FB" stroke="#1B3A6B" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="42" cy="26" r="6" fill="#FFB800" stroke="#1B3A6B" stroke-width="1.2"/>
+          <text x="39" y="30" font-size="8" font-weight="800" fill="#fff" font-family="Arial">+</text>
+        </svg>
+        <div class="count-label">5 und mehr</div>
+      </button>
+      <button class="count-btn" onclick="cardClick(this,'personen','Weiß nicht',4)">
+        <svg width="44" height="36" viewBox="0 0 44 36" fill="none">
+          <text x="4" y="28" font-size="26" fill="#8A9BAE" font-family="Arial">??</text>
+        </svg>
+        <div class="count-label">Weiß nicht</div>
+      </button>
+    </div>
+    <button class="back-btn" onclick="goTo(3)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 5 – ADRESSE (Verfügbarkeit prüfen)
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s5">
+    <p class="step-q">Verfügbarkeit prüfen</p>
+    <p class="step-sub">Wir zeigen Ihnen Ihr Hausdach und prüfen die Verfügbarkeit in Ihrer Region</p>
+    <div class="addr-grid">
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Postleitzahl</label>
+        <input class="form-input" id="iplz" placeholder="32756" maxlength="5" oninput="onPlzInput(this)">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Ort</label>
+        <input class="form-input" id="iort" placeholder="Ihre Stadt" readonly style="background:#F4F6F9">
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="addr-grid">
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Straße</label>
+        <input class="form-input" id="istrasse" placeholder="Musterstraße">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Hausnummer</label>
+        <input class="form-input" id="ihaus" placeholder="42" style="max-width:120px">
+      </div>
+    </div>
+    <div style="height:14px"></div>
+    <!-- Satellite map simulation -->
+    <div class="map-box" id="mapBox" style="display:none">
+      <svg class="map-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="160" fill="#8DA896"/>
+        <rect x="0" y="60" width="140" height="40" rx="2" fill="#7A9A88"/>
+        <rect x="120" y="40" width="100" height="60" rx="2" fill="#6B8A78"/>
+        <rect x="200" y="50" width="80" height="50" rx="2" fill="#7A9A88"/>
+        <rect x="260" y="30" width="90" height="70" rx="2" fill="#6B8A78"/>
+        <rect x="30" y="80" width="70" height="30" fill="#C8B870" opacity=".7"/>
+        <rect x="140" y="70" width="50" height="20" fill="#C8B870" opacity=".6"/>
+        <path d="M0 100 L180 100 L180 108 L0 108 Z" fill="#888" opacity=".5"/>
+        <path d="M200 40 L400 40 L400 48 L200 48 Z" fill="#888" opacity=".5"/>
+        <circle cx="200" cy="80" r="10" fill="#E53E3E" opacity=".9"/>
+        <path d="M200 68 C192 68 184 74 184 82 C184 92 200 106 200 106 C200 106 216 92 216 82 C216 74 208 68 200 68Z" fill="#E53E3E" opacity=".85"/>
+        <circle cx="200" cy="82" r="4" fill="#fff"/>
+      </svg>
+    </div>
+    <p id="mapFoundTxt" style="font-size:.8rem;color:var(--text-mid);margin-bottom:12px;display:none">✓ Wir haben Ihr Hausdach gefunden</p>
+    <button class="cta-btn" id="addrCta" onclick="submitAddr()" style="opacity:.5;pointer-events:none">Ja, das ist mein Hausdach</button>
+    <button class="back-btn" onclick="goTo(4)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 6 – ANREDE & NAME (82%)
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s6">
+    <div class="avail-badge">✓ <strong id="plzBadge">32756</strong>&nbsp;Das Angebot ist in Ihrer Region verfügbar.</div>
+    <div style="text-align:center;margin-bottom:18px">
+      <div style="font-size:1rem;font-weight:800;color:var(--text)">Erstellung Ihres<br>kostenlosen Angebots</div>
+    </div>
+    <div class="pkg-card">
+      <div>
+        <div class="pkg-name">Ihr Komplettpaket</div>
+        <div class="pkg-price">ab 8.990 € inkl. Montage</div>
+        <div class="pkg-info">Individuell kalkuliert für Ihr Dach</div>
+      </div>
+      <div class="pkg-img">🏠</div>
+    </div>
+    <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:18px">Nur noch wenige Angaben und wir erstellen Ihnen ein kostenloses Angebot.</p>
+    <div class="anrede-row">
+      <label class="radio-card" id="rHerr" onclick="pickAnrede('Herr')">
+        <input type="radio" name="anrede" value="Herr"> Herr
+      </label>
+      <label class="radio-card" id="rFrau" onclick="pickAnrede('Frau')">
+        <input type="radio" name="anrede" value="Frau"> Frau
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Name</label>
+      <input class="form-input" id="iname" placeholder="Max Mustermann">
+    </div>
+    <button class="cta-btn" onclick="submitName()">Weiter →</button>
+    <button class="back-btn" onclick="goTo(5)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 7 – EMAIL (91%)
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s7">
+    <div class="avail-badge">✓ <strong id="plzBadge2">32756</strong>&nbsp;Das Angebot ist in Ihrer Region verfügbar.</div>
+    <div style="text-align:center;margin-bottom:18px">
+      <div style="font-size:1rem;font-weight:800;color:var(--text)">Erstellung Ihres<br>kostenlosen Angebots</div>
+    </div>
+    <div class="pkg-card">
+      <div>
+        <div class="pkg-name">Ihr Komplettpaket</div>
+        <div class="pkg-price">ab 8.990 € inkl. Montage</div>
+      </div>
+      <div class="pkg-img">🏠</div>
+    </div>
+    <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:16px">Nur noch wenige Angaben und wir erstellen Ihnen ein kostenloses Angebot.</p>
+    <div class="form-group">
+      <label class="form-label">E-Mail</label>
+      <input class="form-input" type="email" id="iemail" placeholder="ihre@email.de">
+    </div>
+    <button class="cta-btn" onclick="submitEmail()">Weiter →</button>
+    <button class="back-btn" onclick="goTo(6)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 8 – TELEFON (95%)
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s8">
+    <div class="avail-badge">✓ <strong id="plzBadge3">32756</strong>&nbsp;Das Angebot ist in Ihrer Region verfügbar.</div>
+    <div style="text-align:center;margin-bottom:18px">
+      <div style="font-size:1rem;font-weight:800;color:var(--text)">Erstellung Ihres<br>kostenlosen Angebots</div>
+    </div>
+    <div class="pkg-card">
+      <div>
+        <div class="pkg-name">Ihr Komplettpaket</div>
+        <div class="pkg-price">ab 8.990 € inkl. Montage</div>
+      </div>
+      <div class="pkg-img">🏠</div>
+    </div>
+    <p style="font-size:.82rem;color:var(--text-mid);margin-bottom:16px">Nur noch wenige Angaben und wir erstellen Ihnen ein kostenloses Angebot.</p>
+    <div class="form-group">
+      <label class="form-label">Handynummer</label>
+      <input class="form-input" type="tel" id="itel" placeholder="01701234567">
+    </div>
+    <button class="cta-btn gold" onclick="submitTel()">Jetzt kostenloses Angebot erhalten</button>
+    <p class="disclaimer">Wir verarbeiten Ihre Daten zur Erstellung eines kostenlosen und unverbindlichen Angebots sowie zur telefonischen Kontaktaufnahme. <a href="#">Datenschutzinformation</a>.</p>
+    <button class="back-btn" onclick="goTo(7)">← Zurück</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 9 – TERMIN
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s9">
+    <p class="step-q">Bevorzugen Sie einen Termin eher vormittags, mittags oder nachmittags?</p>
+    <p class="step-sub">Bei diesem Termin erfahren Sie individuell, wie die Anlage aussieht und wie viel Sie damit sparen können.</p>
+    <div class="termin-grid">
+      <button class="termin-btn" onclick="cardClick(this,'termin','Vormittags',9)">Vormittags</button>
+      <button class="termin-btn" onclick="cardClick(this,'termin','Mittags',9)">Mittags</button>
+      <button class="termin-btn" onclick="cardClick(this,'termin','Nachmittags',9)">Nachmittags</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       STEP 10 – WIE AUFMERKSAM GEWORDEN
+  ════════════════════════════════════════════════════ -->
+  <div class="step" id="s10">
+    <p class="step-q">Wie sind Sie auf uns aufmerksam geworden?<br><span style="font-weight:500;font-size:.9rem">(Mehrfachauswahl möglich)</span></p>
+    <div class="source-grid">
+      <button class="source-btn" onclick="sourceToggle(this)">Aus der Zeitung</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Soziale Medien</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Radio</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Aus Online Artikeln</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Sonstige</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Influencer</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Fernsehen</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Suchmaschine</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Post / Flyer</button>
+      <button class="source-btn" onclick="sourceToggle(this)">Auf Empfehlung von Familie / Bekannten</button>
+    </div>
+    <div class="skip-link">
+      <button class="skip-btn" onclick="goTo(11)">Überspringen →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SUCCESS
+  ════════════════════════════════════════════════════ -->
+  <div class="success-wrap" id="sSuccess">
+    <div class="success-img">
+      <svg width="100%" height="200" viewBox="0 0 660 200" xmlns="http://www.w3.org/2000/svg">
+        <rect width="660" height="200" fill="#E8EDF2"/>
+        <!-- sky -->
+        <rect width="660" height="130" fill="#D0DCEA"/>
+        <!-- house -->
+        <rect x="220" y="80" width="220" height="120" fill="#E8DCC8" stroke="#C0B098" stroke-width="2"/>
+        <polygon points="180,80 330,20 480,80" fill="#B0765A" stroke="#906050" stroke-width="2"/>
+        <!-- solar panels on roof -->
+        <polygon points="210,74 290,36 360,66 280,104" fill="#2855A0" stroke="#1B3A6B" stroke-width="1.5" opacity=".9"/>
+        <line x1="240" y1="56" x2="315" y2="86" stroke="#4A75C0" stroke-width="1" opacity=".6"/>
+        <line x1="262" y1="44" x2="337" y2="74" stroke="#4A75C0" stroke-width="1" opacity=".6"/>
+        <line x1="217" y1="68" x2="350" y2="72" stroke="#4A75C0" stroke-width=".8" opacity=".5"/>
+        <!-- windows -->
+        <rect x="252" y="110" width="40" height="35" rx="2" fill="#B0D4E8" stroke="#8AAAC0" stroke-width="1.5"/>
+        <rect x="368" y="110" width="40" height="35" rx="2" fill="#B0D4E8" stroke="#8AAAC0" stroke-width="1.5"/>
+        <!-- door -->
+        <rect x="310" y="140" width="40" height="60" rx="2" fill="#906050"/>
+        <!-- sun -->
+        <circle cx="580" cy="40" r="24" fill="#FFD060" opacity=".9"/>
+        <g stroke="#FFD060" stroke-width="2.5" opacity=".6">
+          <line x1="580" y1="8" x2="580" y2="2"/>
+          <line x1="580" y1="72" x2="580" y2="78"/>
+          <line x1="548" y1="40" x2="542" y2="40"/>
+          <line x1="612" y1="40" x2="618" y2="40"/>
+          <line x1="557" y1="17" x2="552" y2="12"/>
+          <line x1="603" y1="63" x2="608" y2="68"/>
+          <line x1="603" y1="17" x2="608" y2="12"/>
+          <line x1="557" y1="63" x2="552" y2="68"/>
+        </g>
+        <!-- ground -->
+        <rect x="0" y="190" width="660" height="10" fill="#8AAA78"/>
+        <!-- check badge -->
+        <circle cx="330" cy="100" r="28" fill="#0C6E3D" opacity=".92"/>
+        <polyline points="318,100 326,110 344,88" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:4px">✓ Anmeldung erfolgreich</div>
+      <h2 style="font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:6px">Herzlichen Glückwunsch!</h2>
+      <p style="font-size:.9rem;color:var(--text-mid)">Sie haben sich erfolgreich angemeldet.</p>
+    </div>
+    <div class="success-cta-gold">
+      <a href="tel:+4915567070271">📞 &nbsp;015567 070 271<br><span style="font-size:.78rem;font-weight:500">Jetzt Rückruf von Ihrem Solarexperten erhalten.</span></a>
+    </div>
+    <div class="success-cta-blue">
+      <a href="#">Oder Termin online buchen →</a>
+    </div>
+    <div class="next-steps">
+      <h3>So geht es jetzt weiter:</h3>
+      <div class="next-item"><div class="next-num done">✓</div><div>Sie haben sich für Ihre kostenlose Solarplanung qualifiziert.</div></div>
+      <div class="next-item"><div class="next-num pending">2</div><div>Sie erhalten einen Termin für ein Expertengespräch.</div></div>
+      <div class="next-item"><div class="next-num pending">3</div><div>Ihr Solarexperte stellt Ihnen Ihr individuelles Ersparnispotenzial in einem Videogespräch vor.</div></div>
+    </div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip" id="trustStrip">
+    <span class="trust-item"><span class="trust-icon">🔒</span> SSL-sicher</span>
+    <span class="trust-item"><span class="trust-icon">✓</span> DSGVO-konform</span>
+    <span class="trust-item"><span class="trust-icon">⭐</span> 4,8/5 Bewertung</span>
+    <span class="trust-item"><span class="trust-icon">📍</span> Regionale Partner</span>
+  </div>
+
+</div><!-- /box -->
+</div><!-- /wrapper -->
+
+<footer style="background:#0D1B2A;color:rgba(255,255,255,.4);text-align:center;padding:18px;font-size:.75rem">
+  © 2026 GreenHorizon Energy · Antonio Schmidt · Amselweg 29, 32657 Lemgo &nbsp;·&nbsp;
+  <a href="#" style="color:rgba(255,255,255,.4)">Impressum</a> &nbsp;·&nbsp;
+  <a href="#" style="color:rgba(255,255,255,.4)">Datenschutz</a>
+</footer>
+
+<script>
+/* ── STATE ──────────────────────────────────────────── */
+var A = {};  // answers
+var PLZ_MAP = {
+  '32657':'Lemgo','32756':'Detmold','32108':'Bad Salzuflen',
+  '33602':'Bielefeld','33098':'Paderborn','32052':'Herford',
+  '32423':'Minden','33330':'Gütersloh','32825':'Blomberg',
+  '32760':'Detmold','32832':'Augustdorf','33604':'Bielefeld'
+};
+
+/* ── STEP CONFIG ────────────────────────────────────── */
+var STEPS = [
+  {pct:10,  kicker:'Schritt 1 von 11', title:'In welchem Bundesland leben Sie?',       sub:'Für Ihr persönliches Solarangebot'},
+  {pct:19,  kicker:'Schritt 2 von 11', title:'In welchem Haustyp wohnen Sie?',         sub:'Für die passende Dimensionierung Ihrer Anlage'},
+  {pct:28,  kicker:'Schritt 3 von 11', title:'Welche Dachform hat Ihr Haus?',           sub:'Wichtig für die optimale Platzierung der Solarmodule'},
+  {pct:36,  kicker:'Schritt 4 von 11', title:'Welchen Dachbelag hat Ihr Haus?',         sub:'Für die Montageplanung der Solarmodule'},
+  {pct:45,  kicker:'Schritt 5 von 11', title:'Wie viele Personen leben in Ihrem Haus?', sub:'Für die Berechnung des optimalen Stromsparpotenzials'},
+  {pct:64,  kicker:'Schritt 6 von 11', title:'Verfügbarkeit prüfen',                    sub:'Wir prüfen die Verfügbarkeit in Ihrer Region'},
+  {pct:82,  kicker:'Schritt 7 von 11', title:'Erstellung Ihres kostenlosen Angebots',   sub:'Nur noch wenige Angaben – fast fertig!'},
+  {pct:91,  kicker:'Schritt 8 von 11', title:'Erstellung Ihres kostenlosen Angebots',   sub:'Nur noch wenige Angaben – fast fertig!'},
+  {pct:95,  kicker:'Schritt 9 von 11', title:'Lohnt sich Solar für Sie? In 2 Minuten testen:', sub:''},
+  {pct:97,  kicker:'Schritt 10 von 11',title:'Bevorzugter Termin',                      sub:''},
+  {pct:99,  kicker:'Schritt 11 von 11',title:'Wie sind Sie auf uns aufmerksam geworden?',sub:''},
+  {pct:100, kicker:'Fertig ✓',          title:'Herzlichen Glückwunsch!',                sub:'Sie haben sich erfolgreich angemeldet.'}
+];
+
+/* ── GO TO STEP ─────────────────────────────────────── */
+function goTo(n) {
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active')});
+  document.getElementById('sSuccess').classList.remove('active');
+
+  if (n === 11) {
+    // success
+    document.getElementById('sSuccess').classList.add('active');
+    document.getElementById('trustStrip').style.display = 'none';
+    setHeader(11);
+    return;
+  }
+
+  var el = document.getElementById('s'+n);
+  if (el) el.classList.add('active');
+  setHeader(n);
+}
+
+function setHeader(n) {
+  var c = STEPS[n] || STEPS[10];
+  document.getElementById('hKicker').textContent = c.kicker;
+  document.getElementById('hTitle').textContent  = c.title;
+  document.getElementById('hSub').textContent    = c.sub;
+  // progress
+  var pct = c.pct;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progTxt').textContent  = pct + ' % geschafft';
+  var chk = document.getElementById('progChk');
+  if (pct >= 100) { chk.style.display='inline-flex'; } else { chk.style.display='none'; }
+}
+
+/* ── STATE CLICK ────────────────────────────────────── */
+function stateClick(btn, val) {
+  document.querySelectorAll('.state-btn').forEach(function(b){b.classList.remove('sel')});
+  btn.classList.add('sel');
+  A.bundesland = val;
+  setTimeout(function(){ goTo(1); }, 280);
+}
+
+/* ── CARD CLICK ─────────────────────────────────────── */
+function cardClick(btn, key, val, currentStep) {
+  btn.closest('div').querySelectorAll('[class*="-btn"]').forEach(function(b){b.classList.remove('sel')});
+  btn.classList.add('sel');
+  A[key] = val;
+  var next = currentStep + 1;
+  setTimeout(function(){ goTo(next); }, 300);
+}
+
+/* ── ANREDE ─────────────────────────────────────────── */
+function pickAnrede(v) {
+  A.anrede = v;
+  document.getElementById('rHerr').classList.toggle('sel', v==='Herr');
+  document.getElementById('rFrau').classList.toggle('sel', v==='Frau');
+}
+
+/* ── PLZ INPUT ──────────────────────────────────────── */
+function onPlzInput(inp) {
+  var v = inp.value.replace(/\D/g,'');
+  inp.value = v;
+  var ort = PLZ_MAP[v] || (v.length===5 ? 'Deutschland' : '');
+  document.getElementById('iort').value = ort;
+  A.plz = v; A.ort = ort;
+  var btn = document.getElementById('addrCta');
+  var map = document.getElementById('mapBox');
+  var mapTxt = document.getElementById('mapFoundTxt');
+  if (v.length === 5) {
+    map.style.display = 'flex';
+    mapTxt.style.display = 'block';
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+    // update PLZ badges
+    ['plzBadge','plzBadge2','plzBadge3'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.textContent = v;
+    });
+  } else {
+    map.style.display = 'none';
+    mapTxt.style.display = 'none';
+    btn.style.opacity = '.5';
+    btn.style.pointerEvents = 'none';
+  }
+}
+
+function submitAddr() {
+  A.strasse = document.getElementById('istrasse').value;
+  A.hnr     = document.getElementById('ihaus').value;
+  goTo(6);
+}
+
+/* ── NAME ───────────────────────────────────────────── */
+function submitName() {
+  var n = document.getElementById('iname').value.trim();
+  if (!n) { document.getElementById('iname').classList.add('err'); return; }
+  document.getElementById('iname').classList.remove('err');
+  A.name = n;
+  goTo(7);
+}
+
+/* ── EMAIL ──────────────────────────────────────────── */
+function submitEmail() {
+  var e = document.getElementById('iemail').value.trim();
+  if (!e || !e.includes('@')) { document.getElementById('iemail').classList.add('err'); return; }
+  document.getElementById('iemail').classList.remove('err');
+  A.email = e;
+  goTo(8);
+}
+
+/* ── TEL ────────────────────────────────────────────── */
+function submitTel() {
+  var t = document.getElementById('itel').value.trim();
+  if (!t || t.length < 7) { document.getElementById('itel').classList.add('err'); return; }
+  document.getElementById('itel').classList.remove('err');
+  A.tel = t;
+  // send to formspree
+  sendLead();
+  goTo(9);
+}
+
+/* ── SOURCE TOGGLE ──────────────────────────────────── */
+function sourceToggle(btn) {
+  btn.classList.toggle('sel');
+}
+
+/* ── SEND LEAD ──────────────────────────────────────── */
+async function sendLead() {
+  try {
+    await fetch('https://formspree.io/f/mzdjwqwp', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        _subject: 'Solar-Lead – ' + (A.name||'?') + ' – PLZ ' + (A.plz||'?'),
+        Bundesland: A.bundesland||'–',
+        Haustyp:    A.haustyp||'–',
+        Dachform:   A.dachform||'–',
+        Dachbelag:  A.dachbelag||'–',
+        Personen:   A.personen||'–',
+        PLZ:        A.plz||'–',
+        Ort:        A.ort||'–',
+        Straße:     (A.strasse||'–') + ' ' + (A.hnr||''),
+        Anrede:     A.anrede||'–',
+        Name:       A.name||'–',
+        Email:      A.email||'–',
+        Telefon:    A.tel||'–',
+        Zeitstempel: new Date().toLocaleString('de-DE')
+      })
+    });
+  } catch(e){ console.warn(e); }
+}
+</script>
+</body>
+</html>
